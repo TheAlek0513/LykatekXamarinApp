@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.OrderSuccessfullySentPage"
+             Title="Din ordre er sendt"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid
+                    AbsoluteLayout.LayoutBounds=".5,.5,400,200"
+                    AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Image HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Source="checked.png" />
+                </Grid>
+                <Grid
+                    AbsoluteLayout.LayoutBounds=".5,.65,300,200"
+                    AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Label Text="Vi har nu modtaget din ordre."
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+                </Grid>
+                <Grid
+                    AbsoluteLayout.LayoutBounds=".5,.80,300,200"
+                    AbsoluteLayout.LayoutFlags="PositionProportional">
+
+                    <Button Text="Kom tilbage" FontSize="20" Clicked="ReturnButton_Clicked" BackgroundColor="Transparent" />
+                </Grid>
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

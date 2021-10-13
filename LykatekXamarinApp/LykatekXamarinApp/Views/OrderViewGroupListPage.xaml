@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.OrderViewGroupList"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             Title="Ny bestilling ">
+
+<ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <Label>Gruppe</Label>
+                    <Picker x:Name="GroupPicker" ios:Picker.UpdateMode="WhenFinished" ItemDisplayBinding="{Binding DisplayText}"/>
+
+                    <Label>Type</Label>
+                    <Picker x:Name="TypePicker" ios:Picker.UpdateMode="WhenFinished" ItemDisplayBinding="{Binding DisplayText}"/>
+
+                    <Label>Serie</Label>
+                    <Picker x:Name="SeriePicker" ios:Picker.UpdateMode="WhenFinished" ItemDisplayBinding="{Binding DisplayText}"/>
+
+                    <Button x:Name="Button" Text="Vælg Produkt" Clicked="SelectProduct_Clicked" IsEnabled="False"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

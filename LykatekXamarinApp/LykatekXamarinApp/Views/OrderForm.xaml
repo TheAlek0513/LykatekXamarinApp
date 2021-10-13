@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.OrderForm"
+             Title="Ny bestilling - Indtast mål">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <Image Source="T_Muffe_M_Afgrening.png"></Image>
+                <StackLayout x:Name="EntriesStacklayout">
+                </StackLayout>
+                
+                <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
+                <Button x:Name="GoFutherButton" Text="Gå videre" Clicked="GoFuther_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.FinalizeOrderPage"
+             Title="Indtast oplysninger">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <Editor HeightRequest="100" TabIndex="1" Placeholder="Tilføj en kommentar" x:Name="Description" AutoSize="TextChanges" Keyboard="Text"></Editor>
+
+                <Entry x:Name="ContactName" TabIndex="2" ReturnType="Next" Placeholder="Kontaktperson - Navn" Keyboard="Text"></Entry>
+                <Entry x:Name="ContactPhone" TabIndex="3" ReturnType="Next" Placeholder="Kontaktperson - Telefonnummer" Keyboard="Telephone"></Entry>
+
+                <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
+                <Button x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

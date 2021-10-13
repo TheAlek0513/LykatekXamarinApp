@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="logo.png" />
+            <Entry Keyboard="Telephone" TabIndex="1" ReturnType="Next" Placeholder="Brugernavn" x:Name="inputUsername" Text="" />
+            <Entry Keyboard="Text" TabIndex="2" ReturnType="Next" x:Name="inputPassword" Placeholder="Adgangskode" Text="" IsPassword="true" />
+            <ActivityIndicator IsRunning="False" x:Name="LoginActivityIndicator" Color="#000000"/>
+            <Button x:Name="LoginButton" Clicked="LoginButton_Clicked" VerticalOptions="Center" Text="Log ind"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>  
