@@ -188,7 +188,15 @@ namespace LykatekXamarinApp.Views
                                 Entry currentEntry = child as Entry;
                                 if (currentEntry.ClassId == field.Name)
                                 {
-                                    orderTableProp.SetValue(orderTable, currentEntry.Text);
+                                    if (orderTableProp.GetValue(orderTable) != null)
+                                    {
+                                        var test = orderTableProp.GetValue(orderTable);
+                                        orderTableProp.SetValue(orderTable, orderTableProp.GetValue(orderTable) + ";" + currentEntry.Text.ToString());
+                                    }
+                                    else
+                                    {
+                                        orderTableProp.SetValue(orderTable, currentEntry.Text);
+                                    }
                                 }
                             }
                         }
