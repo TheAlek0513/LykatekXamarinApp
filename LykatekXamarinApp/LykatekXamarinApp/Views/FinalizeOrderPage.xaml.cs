@@ -41,5 +41,11 @@ namespace LykatekXamarinApp.Views
             await Navigation.PushModalAsync(new OrderSuccessfullySentPage());
         }
 
+
+        private async Task DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            Console.WriteLine(DatePicker.Date);
+            await this.DisplayAlert("Fejl", DatePicker.Date.ToString(), "OK");
+        }
     }
 }

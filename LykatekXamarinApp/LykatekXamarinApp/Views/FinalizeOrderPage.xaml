@@ -10,7 +10,7 @@
 
                 <Entry x:Name="ContactName" TabIndex="2" ReturnType="Next" Placeholder="Kontaktperson - Navn" Keyboard="Text"></Entry>
                 <Entry x:Name="ContactPhone" TabIndex="3" ReturnType="Next" Placeholder="Kontaktperson - Telefonnummer" Keyboard="Telephone"></Entry>
-
+                <DatePicker x:Name="DatePicker" DateSelected="DatePicker_DateSelected"></DatePicker>
                 <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
                 <Button x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
             </StackLayout>
