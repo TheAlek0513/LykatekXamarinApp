@@ -42,10 +42,11 @@ namespace LykatekXamarinApp.Views
         }
 
 
-        private async Task DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        public void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            Console.WriteLine(DatePicker.Date);
-            await this.DisplayAlert("Fejl", DatePicker.Date.ToString(), "OK");
+            //this.DisplayAlert("Fejl", datePicker.Date.ToString(), "OK");
+            Console.WriteLine(DatePickerInput.Date.ToString());
         }
+
     }
 }
