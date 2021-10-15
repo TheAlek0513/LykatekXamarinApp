@@ -4,16 +4,50 @@
              x:Class="LykatekXamarinApp.Views.FinalizeOrderPage"
              Title="Indtast oplysninger">
     <ContentPage.Content>
-        <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout>
-                <Editor HeightRequest="100" TabIndex="1" Placeholder="Tilføj en kommentar" x:Name="Description" AutoSize="TextChanges" Keyboard="Text"></Editor>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout Padding="10">
+                    <!-- Order Meta -->
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Din reference" />
+                    <Entry x:Name="ContactReference" TabIndex="2" ReturnType="Next" Placeholder="Skriv din reference her.." Keyboard="Text"></Entry>
 
-                <Entry x:Name="ContactName" TabIndex="2" ReturnType="Next" Placeholder="Kontaktperson - Navn" Keyboard="Text"></Entry>
-                <Entry x:Name="ContactPhone" TabIndex="3" ReturnType="Next" Placeholder="Kontaktperson - Telefonnummer" Keyboard="Telephone"></Entry>
-                <DatePicker x:Name="DatePickerInput" DateSelected="DatePicker_DateSelected" ></DatePicker>
-                <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
-                <Button x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
-            </StackLayout>
-        </ScrollView>
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kommentar:" />
+                    <Editor TabIndex="1" Placeholder="Skriv din kommentar her.." x:Name="Description" AutoSize="TextChanges" Keyboard="Text"></Editor>
+
+                    <!-- Secondary Contact Person -->
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kontakt Navn:" />
+                    <Entry x:Name="ContactName" TabIndex="2" ReturnType="Next" Placeholder="E.g. Jens Hansen" Keyboard="Text"></Entry>
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kontakt telefon" />
+                    <Entry x:Name="ContactPhone" TabIndex="3" ReturnType="Next" Placeholder="(+45) xx xx xx xx" Keyboard="Telephone"></Entry>
+
+                    <!-- Order options -->
+                    <CheckBox Scale="2" x:Name="OrderIsUrgent" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0"/>
+                    <Label FontSize="18" FontAttributes="Bold" Text="Hasteordre?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
+
+                    <CheckBox Scale="2" CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                    <Label FontSize="18" FontAttributes="Bold" Text="Ønskes levering?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+
+                    <!-- Delivery date -->
+                    <Label FontAttributes="Bold" IsVisible="false" Padding="2" FontSize="18" Text="Ønsket leveringsdato" />
+                    <DatePicker Format="dd/MM/yyyy" x:Name="DatePickerInput" DateSelected="DatePicker_DateSelected" MinimumDate="{Binding minDate}"></DatePicker>
+
+                    <!-- Street and address -->
+                    <Label IsVisible="False" x:Name="DeliveryStreetLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="Adresse" />
+                    <Entry IsVisible="False" x:Name="DeliveryStreet" TabIndex="3" ReturnType="Next" Placeholder="E.g. Vestergade 55" Keyboard="Text"></Entry>
+
+                    <Label IsVisible="False" x:Name="DeliveryZipCodeLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="Postnummer" />
+                    <Entry IsVisible="False" x:Name="DeliveryZipCode" TabIndex="3" ReturnType="Next" Placeholder="E.g. 9000" Keyboard="Numeric"></Entry>
+
+                    <Label IsVisible="False" x:Name="DeliveryCityLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="By" />
+                    <Entry IsVisible="False" x:Name="DeliveryCity" TabIndex="3" ReturnType="Next" Placeholder="E.g. Aalborg" Keyboard="Text"></Entry>
+                    
+                    <!-- Loading -->
+                    <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
+
+                    <!-- Send Order Btn -->
+                    <Button x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -15,6 +15,11 @@ namespace LykatekXamarinApp.Views
     public partial class FinalizeOrderPage : ContentPage
     {
         public OrderTable ot;
+        public DateTime minDate = DateTime.Now;
+
+        public bool deliveryChecked = false;
+        public bool urgentChecked = false;
+
         public FinalizeOrderPage(OrderTable orderTable)
         {
             ot = orderTable;
@@ -26,7 +31,6 @@ namespace LykatekXamarinApp.Views
             SendOrderButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
             ot.Comment = Description.Text;
-
 
             ErrorCodes result = await Utillity.SendOrderTable(ot);
 
@@ -41,12 +45,37 @@ namespace LykatekXamarinApp.Views
             await Navigation.PushModalAsync(new OrderSuccessfullySentPage());
         }
 
-
         public void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             //this.DisplayAlert("Fejl", datePicker.Date.ToString(), "OK");
-            Console.WriteLine(DatePickerInput.Date.ToString());
+            Console.WriteLine(DatePickerInput.Date);
+            Console.WriteLine(String.Format("{0:d/M/yyyy}", DatePickerInput.Date));
         }
 
+        void OnDeliveryCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (DeliveryCheckbox.IsChecked)
+            {
+                DeliveryStreet.IsVisible = true;
+                DeliveryStreetLabel.IsVisible = true;
+
+                DeliveryZipCode.IsVisible = true;
+                DeliveryZipCodeLabel.IsVisible = true;
+
+                DeliveryCity.IsVisible = true;
+                DeliveryCityLabel.IsVisible = true;
+
+            } else
+            {
+                DeliveryStreet.IsVisible = false;
+                DeliveryStreetLabel.IsVisible = false;
+
+                DeliveryZipCode.IsVisible = false;
+                DeliveryZipCodeLabel.IsVisible = false;
+
+                DeliveryCity.IsVisible = false;
+                DeliveryCityLabel.IsVisible = false;
+            }
+        }
     }
 }

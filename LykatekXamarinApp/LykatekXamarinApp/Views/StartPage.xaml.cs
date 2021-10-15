@@ -44,5 +44,10 @@ namespace LykatekXamarinApp.Views
                 Application.Current.MainPage = new LoginPage();
             }
         }
+
+        async void ViewContactPage_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ContactPage());
+        }
     }
 }

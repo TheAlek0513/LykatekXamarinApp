@@ -101,6 +101,14 @@ namespace LykatekXamarinApp.Views
             foreach (RelevantOrderProperty field in GetRelevantProps())
             {
                 int currentTabIndex = LastTabIndex++;
+
+                Label label = new Label() {
+                    Text = field.DisplayName,
+                    FontSize = 18,
+                    Padding = 2,
+                    FontAttributes = FontAttributes.Bold
+                };
+
                 Entry entry = new Entry() {
                     Placeholder = field.DisplayName,
                     Keyboard = Keyboard.Numeric,
@@ -109,6 +117,7 @@ namespace LykatekXamarinApp.Views
                     ReturnType = ReturnType.Next
                 };
 
+                EntriesStacklayout.Children.Add(label);
                 EntriesStacklayout.Children.Add(entry);
 
                 if (LastTabIndex == 1)
@@ -116,7 +125,6 @@ namespace LykatekXamarinApp.Views
                     firstEntryField = entry;
                 }
             }
-            
         }
 
         protected override void OnAppearing() {

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LykatekXamarinApp.Views.ContactPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="logo.png" />
+            <Button Clicked="CallLykatec_Clicked" Text="Ring til Lykatec" Image="phone.png" />
+            <Button Clicked="EmailLykatec_Clicked" Text="Send e-mail til Lykatec" Image="email.png" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

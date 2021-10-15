@@ -23,6 +23,16 @@
                        HasShadow="True"
                        Margin="15">
                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ViewContactPage_Clicked" NumberOfTapsRequired="1" />
+                    </Frame.GestureRecognizers>
+                    <Label FontSize="15" Padding="5" Text="Kontakt os" />
+                </Frame>
+
+                <Frame BorderColor="#ccc"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       Margin="15">
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="SignOut_Clicked" NumberOfTapsRequired="1" />
                     </Frame.GestureRecognizers>
                     <Label FontSize="15" Padding="5" Text="Log af" />

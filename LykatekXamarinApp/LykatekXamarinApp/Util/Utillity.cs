@@ -77,11 +77,12 @@ namespace LykatecMobileApp.Util
 
         public static bool ContactLogout()
         {
-            ContactPersonDatabaseController spdc = new ContactPersonDatabaseController();
-            SettingsDatabaseController sdc = new SettingsDatabaseController();
+            Settings.ContactPersonUsername = null;
+            Settings.ContactPersonPassword = null;
+            Settings.ContactPerson = null;
 
-            sdc.DeleteAll();
-            spdc.DeleteAll();
+            App.SettingsDatabase.SaveSettings();
+            _ = Utillity.SyncAll();
 
             return true;
         }
