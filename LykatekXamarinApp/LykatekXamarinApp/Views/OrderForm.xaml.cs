@@ -26,10 +26,17 @@ namespace LykatekXamarinApp.Views
         public ConfigSeries configSerie;
         public String[] checkProps = new String[]
         {
-            "M1Dim", "M1Length", "M1Degrees","M1TotalLength",
-            "M2Dim", "M2Length", "M2Degrees","M2TotalLength",
-            "T1Dim", "T1Length", "T1Degrees","T1TotalLength",
-            "T2Dim", "T2Length", "T2Degrees","T2TotalLength"
+            "M1Dim", "M1Length", "M1Degrees", "M1TotalLength",
+            "M2Dim", "M2Length", "M2Degrees", "M2TotalLength",
+            "T1Dim", "T1Length", "T1Degrees", "T1TotalLength",
+            "T2Dim", "T2Length", "T2Degrees", "T2TotalLength"
+        };
+        public Dictionary<string, string> entryColours = new Dictionary<string, string>
+        {
+            { "M1", "#245c77" },
+            { "T1", "#1f762e" },
+            { "M2", "blue" },
+            { "T2", "green" },
         };
         private Entry firstEntryField = null;
         public int LastTabIndex = 0;
@@ -102,11 +109,20 @@ namespace LykatekXamarinApp.Views
             {
                 int currentTabIndex = LastTabIndex++;
 
-                Label label = new Label() {
+                string entryColour = "#000000";
+                string attemptColor = entryColour;
+                if (entryColours.TryGetValue(field.Name.Substring(0, 2), out attemptColor))
+                {
+                    entryColour = attemptColor;
+                }
+
+                Label label = new Label()
+                {
                     Text = field.DisplayName,
                     FontSize = 18,
                     Padding = 2,
-                    FontAttributes = FontAttributes.Bold
+                    FontAttributes = FontAttributes.Bold,
+                    TextColor = Color.FromHex(entryColour)
                 };
 
                 Entry entry = new Entry() {
@@ -114,7 +130,8 @@ namespace LykatekXamarinApp.Views
                     Keyboard = Keyboard.Numeric,
                     ClassId = field.Name,
                     TabIndex = currentTabIndex,
-                    ReturnType = ReturnType.Next
+                    ReturnType = ReturnType.Next,
+                    TextColor = Color.FromHex(entryColour)
                 };
 
                 EntriesStacklayout.Children.Add(label);
@@ -142,11 +159,11 @@ namespace LykatekXamarinApp.Views
             {
                 OrderTable orderTable = new OrderTable();
                 var orderTableProp = orderTable.GetType().GetProperty("");
-                orderTable.Debtor = Settings.ContactPerson.AccountName;
-                orderTable.ContactPerson = Settings.ContactPerson.KeyStr;
-                orderTable.CreatedDateTime = DateTime.Now;
-                orderTable.DeliveryDate = new DateTime(2022, 5, 1, 8, 30, 52);
+                orderTable.ContactPerson = Settings.ContactPersonId;
                 orderTable.ConfigSeries = configSerie.KeyName;
+                orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
+                orderTable.Debtor = Settings.DebtorId;
+
                 foreach (RelevantOrderProperty field in GetRelevantProps())
                 {
                     switch (field.Name)

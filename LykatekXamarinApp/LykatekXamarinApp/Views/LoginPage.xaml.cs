@@ -49,7 +49,9 @@ namespace LykatekXamarinApp.Views
                 {
                     Settings.ContactPersonUsername = inputUsername;
                     Settings.ContactPersonPassword = inputPassword;
-                    Settings.ContactPerson = authenticatedContactPerson;
+
+                    Settings.ContactPersonId = authenticatedContactPerson.KeyStr;
+                    Settings.DebtorId = authenticatedContactPerson.DCAccount;
 
                     App.SettingsDatabase.SaveSettings();
                     var syncResult = await Utillity.SyncAll();

@@ -25,8 +25,9 @@ namespace LykatecMobileApp.Util
         public static List<ConfigSeries> ConfigSeries { get; set; }
         public static string ContactPersonUsername { get; set; }
         public static string ContactPersonPassword { get; set; }
-        public static ContactClient ContactPerson { get; set; }
         public static List<ContactPerson> contactList { get; set; }
+        public static string ContactPersonId { get; set; }
+        public static string DebtorId { get; set; }
         public static Uniconta.API.Service.Session Session
         {
             get

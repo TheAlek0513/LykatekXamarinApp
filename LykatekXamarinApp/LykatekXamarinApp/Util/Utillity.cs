@@ -39,7 +39,6 @@ namespace LykatecMobileApp.Util
             }
 
             await SyncConfigSeries();
-            await SyncContactPerson();
             return true;
         }
 
@@ -79,7 +78,6 @@ namespace LykatecMobileApp.Util
         {
             Settings.ContactPersonUsername = null;
             Settings.ContactPersonPassword = null;
-            Settings.ContactPerson = null;
 
             App.SettingsDatabase.SaveSettings();
             _ = Utillity.SyncAll();
@@ -99,17 +97,6 @@ namespace LykatecMobileApp.Util
         {
             Settings.ConfigSeries = (await Settings.CrudApi.Query<ConfigSeries>()).ToList();
         }
-        private static async Task SyncContactPerson()
-        {
-            await Utillity.GetContactPersons();
-            ContactClient authenticatedContactPerson = (await Utillity.ContactLogin(Settings.ContactPersonUsername, Settings.ContactPersonPassword));
-            if (authenticatedContactPerson != null && authenticatedContactPerson is ContactClient)
-            {
-                Settings.ContactPerson = authenticatedContactPerson;
-            }
-
-        }
-
 
         public static async Task<List<ContactPerson>> GetContactPersons()
         {

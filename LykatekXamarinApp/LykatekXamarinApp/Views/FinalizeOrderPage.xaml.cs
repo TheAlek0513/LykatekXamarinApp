@@ -24,6 +24,7 @@ namespace LykatekXamarinApp.Views
         {
             ot = orderTable;
             InitializeComponent();
+
         }
 
         public async void SendOrder_Clicked(object sender, EventArgs e)
@@ -31,6 +32,14 @@ namespace LykatekXamarinApp.Views
             SendOrderButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
             ot.Comment = Description.Text;
+            ot.DeliveryAddress = DeliveryStreet.Text;
+            ot.ZipCode = DeliveryZipCode.Text;
+            ot.City = DeliveryCity.Text;
+            ot.YourReference = ContactReference.Text;
+            ot.PriorityOrder = PriorityOrder.IsChecked;
+            ot.DeliveryDate = DatePickerInput.Date;
+            ot.CreatedDateTime = DateTime.Now;
+            ot.SecondaryContact = String.Format("{0} {1}", ContactName.Text, ContactPhone.Text);
 
             ErrorCodes result = await Utillity.SendOrderTable(ot);
 
@@ -43,13 +52,6 @@ namespace LykatekXamarinApp.Views
             OrderActivityIndicator.IsRunning = true;
 
             await Navigation.PushModalAsync(new OrderSuccessfullySentPage());
-        }
-
-        public void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            //this.DisplayAlert("Fejl", datePicker.Date.ToString(), "OK");
-            Console.WriteLine(DatePickerInput.Date);
-            Console.WriteLine(String.Format("{0:d/M/yyyy}", DatePickerInput.Date));
         }
 
         void OnDeliveryCheckedChanged(object sender, CheckedChangedEventArgs e)

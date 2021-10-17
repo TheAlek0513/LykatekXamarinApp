@@ -82,6 +82,8 @@ namespace LykatecMobileApp.Data
                     Settings.APIPassword = settings.APIPassword;
                     Settings.ContactPersonUsername = settings.ContactPersonUsername;
                     Settings.ContactPersonPassword = settings.ContactPersonPassword;
+                    Settings.ContactPersonId = settings.ContactPersonId;
+                    Settings.DebtorId = settings.DebtorId;
                 }
             }
             catch { }
@@ -103,6 +105,8 @@ namespace LykatecMobileApp.Data
                         APIPassword = Settings.APIPassword,
                         ContactPersonUsername = Settings.ContactPersonUsername,
                         ContactPersonPassword = Settings.ContactPersonPassword,
+                        ContactPersonId = Settings.ContactPersonId,
+                        DebtorId = Settings.DebtorId,
                     };
                     try
                     {

@@ -9,6 +9,7 @@ using Uniconta.DataModel;
 namespace LykatekXamarinApp.Models.Uniconta
 {
 
+
 	public class OrderTable : TableDataWithKey
 	{
 		public override int UserTableId { get { return 34671; } }
@@ -142,13 +143,104 @@ namespace LykatekXamarinApp.Models.Uniconta
 			set { this.SetUserFieldString(17, value); NotifyPropertyChanged("T1Degrees"); }
 		}
 
+		[Display(Name = "M1 - Krympbar")]
+		public bool M1Shrink
+		{
+			get { return this.GetUserFieldBoolean(18); }
+			set { this.SetUserFieldBoolean(18, value); NotifyPropertyChanged("M1Shrink"); }
+		}
+
+		[Display(Name = "M1 - Ilagt mastic")]
+		public bool M1LoadedMastic
+		{
+			get { return this.GetUserFieldBoolean(19); }
+			set { this.SetUserFieldBoolean(19, value); NotifyPropertyChanged("M1LoadedMastic"); }
+		}
+
+		[Display(Name = "T1 - Krympbar")]
+		public bool T1Shrink
+		{
+			get { return this.GetUserFieldBoolean(20); }
+			set { this.SetUserFieldBoolean(20, value); NotifyPropertyChanged("T1Shrink"); }
+		}
+
+		[Display(Name = "T1 - Ilagt mastic")]
+		public bool T1LoadedMastic
+		{
+			get { return this.GetUserFieldBoolean(21); }
+			set { this.SetUserFieldBoolean(21, value); NotifyPropertyChanged("T1LoadedMastic"); }
+		}
+
+		[Display(Name = "T1 - Anboring")]
+		public bool T1Drilling
+		{
+			get { return this.GetUserFieldBoolean(22); }
+			set { this.SetUserFieldBoolean(22, value); NotifyPropertyChanged("T1Drilling"); }
+		}
+
+		[Display(Name = "By")]
+		public string City
+		{
+			get { return this.GetUserFieldString(23); }
+			set { this.SetUserFieldString(23, value); NotifyPropertyChanged("City"); }
+		}
+
+		[Display(Name = "Postnummer")]
+		public string ZipCode
+		{
+			get { return this.GetUserFieldString(24); }
+			set { this.SetUserFieldString(24, value); NotifyPropertyChanged("ZipCode"); }
+		}
+
+		[Display(Name = "Adresse")]
+		public string Address
+		{
+			get { return this.GetUserFieldString(25); }
+			set { this.SetUserFieldString(25, value); NotifyPropertyChanged("Address"); }
+		}
+
+		[Display(Name = "Leverings adresse")]
+		public string DeliveryAddress
+		{
+			get { return this.GetUserFieldString(26); }
+			set { this.SetUserFieldString(26, value); NotifyPropertyChanged("DeliveryAddress"); }
+		}
+
+		[Display(Name = "Sekundær kontaktperson")]
+		public string SecondaryContact
+		{
+			get { return this.GetUserFieldString(27); }
+			set { this.SetUserFieldString(27, value); NotifyPropertyChanged("SecondaryContact"); }
+		}
+
+		[Display(Name = "Din Reference")]
+		public string YourReference
+		{
+			get { return this.GetUserFieldString(28); }
+			set { this.SetUserFieldString(28, value); NotifyPropertyChanged("YourReference"); }
+		}
+
+		[Display(Name = "Hasteordre")]
+		public bool PriorityOrder
+		{
+			get { return this.GetUserFieldBoolean(29); }
+			set { this.SetUserFieldBoolean(29, value); NotifyPropertyChanged("PriorityOrder"); }
+		}
+
+		[Display(Name = "Antal")]
+		public string Quantity
+		{
+			get { return this.GetUserFieldString(30); }
+			set { this.SetUserFieldString(30, value); NotifyPropertyChanged("Quantity"); }
+		}
+
 		[Display(Name = "Kommentar")]
 		public string Comment
 		{
-			get { return this.GetUserFieldString(18); }
-			set { this.SetUserFieldString(18, value); NotifyPropertyChanged("Comment"); }
+			get { return this.GetUserFieldString(31); }
+			set { this.SetUserFieldString(31, value); NotifyPropertyChanged("Comment"); }
 		}
-
 	}
+
 
 }
