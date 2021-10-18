@@ -107,13 +107,6 @@ namespace LykatecMobileApp.Util
             return Settings.contactList;
         }
 
-
-
-        public static async Task SyncProductImages()
-        {
-
-        }
-
         public static async Task<ErrorCodes> SendOrderTable(OrderTable orderTable)
         {
             var res = await Settings.crudApi.Insert(orderTable);
