@@ -96,7 +96,7 @@ namespace LykatekXamarinApp.Views
                             {
                                 configSerieFields.Add(new RelevantOrderProperty() { Name = prop.Name, DisplayName = displayName });
                             }
-                        }   
+                        }
                     }
                 }
             }
@@ -158,7 +158,6 @@ namespace LykatekXamarinApp.Views
             try
             {
                 OrderTable orderTable = new OrderTable();
-                var orderTableProp = orderTable.GetType().GetProperty("");
                 orderTable.ContactPerson = Settings.ContactPersonId;
                 orderTable.ConfigSeries = configSerie.KeyName;
                 orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
@@ -166,44 +165,8 @@ namespace LykatekXamarinApp.Views
 
                 foreach (RelevantOrderProperty field in GetRelevantProps())
                 {
-                    switch (field.Name)
-                    { 
-                        case "M1Dim":
-                            Console.WriteLine("i'm here M1Dim");
-                            orderTableProp = orderTable.GetType().GetProperty("M1Nominel");
-                            break;
-                        case "M2Dim":
-                            Console.WriteLine("i'm here M2Dim");
-                            orderTableProp = orderTable.GetType().GetProperty("M2Nominel");
-                            break;
-                        case "T1Dim":
-                            Console.WriteLine("i'm here T1Dim");
-                            orderTableProp = orderTable.GetType().GetProperty("T1Nominel");
-                            break;
-                        case "T2Dim":
-                            Console.WriteLine("i'm here T2Dim");
-                            orderTableProp = orderTable.GetType().GetProperty("T2Nominel");
-                            break;
-                        case "M1TotalLength":
-                            Console.WriteLine("i'm here M1TotalLength");
-                            orderTableProp = orderTable.GetType().GetProperty("M1LengthTotal");
-                            break;
-                        case "M2TotalLength":
-                            Console.WriteLine("i'm here M2TotalLength");
-                            orderTableProp = orderTable.GetType().GetProperty("M2LengthTotal");
-                            break;
-                        case "T1TotalLength":
-                            Console.WriteLine("i'm here T1TotalLength");
-                            orderTableProp = orderTable.GetType().GetProperty("T1LengthTotal");
-                            break;
-                        case "T2TotalLength":
-                            Console.WriteLine("i'm here T2TotalLength");
-                            orderTableProp = orderTable.GetType().GetProperty("T2LengthTotal");
-                            break;
-                        default:
-                            orderTable.GetType().GetProperty(field.Name);
-                            break;
-                    }
+                    var orderTableProp = orderTable.GetType().GetProperty(field.Name);
+
                     if (orderTableProp != null)
                     {
                         foreach (var child in EntriesStacklayout.Children)
@@ -213,20 +176,13 @@ namespace LykatekXamarinApp.Views
                                 Entry currentEntry = child as Entry;
                                 if (currentEntry.ClassId == field.Name)
                                 {
-                                    if (orderTableProp.GetValue(orderTable) != null)
-                                    {
-                                        var test = orderTableProp.GetValue(orderTable);
-                                        orderTableProp.SetValue(orderTable, orderTableProp.GetValue(orderTable) + ";" + currentEntry.Text.ToString());
-                                    }
-                                    else
-                                    {
-                                        orderTableProp.SetValue(orderTable, currentEntry.Text);
-                                    }
+                                    orderTableProp.SetValue(orderTable, currentEntry.Text);
                                 }
                             }
                         }
                     }
                 }
+
                 await Navigation.PushAsync(new FinalizeOrderPage(orderTable));
 
                 GoFutherButton.IsEnabled = true;

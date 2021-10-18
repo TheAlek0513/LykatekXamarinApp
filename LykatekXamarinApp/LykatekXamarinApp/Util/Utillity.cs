@@ -44,7 +44,6 @@ namespace LykatecMobileApp.Util
 
         internal static bool IsValidLoginAsync()
         {
-
             return !string.IsNullOrEmpty(Settings.APIUsername)
                     && !string.IsNullOrEmpty(Settings.APIPassword)
                     && !string.IsNullOrEmpty(Settings.ContactPersonUsername)
@@ -106,6 +105,13 @@ namespace LykatecMobileApp.Util
             Settings.contactList = App.ContactDatabase.GetAll();
 
             return Settings.contactList;
+        }
+
+
+
+        public static async Task SyncProductImages()
+        {
+
         }
 
         public static async Task<ErrorCodes> SendOrderTable(OrderTable orderTable)

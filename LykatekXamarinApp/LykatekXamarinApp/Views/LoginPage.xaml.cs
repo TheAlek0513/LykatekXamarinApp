@@ -1,6 +1,7 @@
 ﻿using LykatecMobileApp.Util;
 using LykatekXamarinApp.Util;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Uniconta.ClientTools.DataModel;
 using Xamarin.Forms;
