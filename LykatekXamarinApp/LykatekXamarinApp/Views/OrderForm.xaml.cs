@@ -33,6 +33,21 @@ namespace LykatekXamarinApp.Views
         private Entry firstEntryField = null;
         public int LastTabIndex = 0;
 
+        private RadioButton M1_krympbarRBJa = null;
+        private RadioButton M1_krympbarRBNej = null;
+        private CheckBox M1_Mastic = null;
+
+        private RadioButton T1_krympbarRBJa = null;
+        private RadioButton T1_krympbarRBNej = null;
+        private CheckBox T1_Mastic = null;
+        private CheckBox T1_Anboring = null;
+
+        /**
+         * Denne liste (allEntries) bliver brugt når vi skal sættes værdierne på OrderTable instansen.
+         * Grunden til at listen er nødvendigt er fordi vi ikke direkte kan foreach over EntriesStackLayout, pga. frames som gør det en smule mere besværligt.
+         */
+        private List<Entry> allEntries = new List<Entry>(); 
+
         public string GetFriendlyName(string val)
         {
             var map = new Dictionary<string, string>();
@@ -102,16 +117,6 @@ namespace LykatekXamarinApp.Views
             int M2Count = 0;
             int T2Count = 0;
 
-            RadioButton M1_krympbarRBJa = null;
-            RadioButton M1_krympbarRBNej = null;
-            CheckBox M1_Mastic = null;
-
-            RadioButton T1_krympbarRBJa = null;
-            RadioButton T1_krympbarRBNej = null;
-            CheckBox T1_Mastic = null;
-            CheckBox T1_Anboring = null;
-
-
             foreach (RelevantOrderProperty field in GetRelevantProps())
             {
                 switch(field.Name.Substring(0,2))
@@ -141,8 +146,6 @@ namespace LykatekXamarinApp.Views
                 {
                     entryColour = attemptColor;
                 }
-
-
                 
                 var label = new Label()
                 {
@@ -162,6 +165,8 @@ namespace LykatekXamarinApp.Views
                     TextColor = Color.FromHex(entryColour)
                 };
 
+                allEntries.Add(entry);
+
                 Frame frame = new Frame()
                 {
                     BorderColor = Color.FromHex(entryColour),
@@ -173,7 +178,6 @@ namespace LykatekXamarinApp.Views
                         }
                     }
                 };
-                 
 
                 EntriesStacklayout.Children.Add(frame);
 
@@ -316,21 +320,53 @@ namespace LykatekXamarinApp.Views
 
         public async void GoFuther_Clicked(object sender, EventArgs e)
         {
+            OrderTable orderTable = new OrderTable();
+
+            // M1 Krymp:
+            if (M1_krympbarRBJa != null && M1_krympbarRBNej != null)
+            {
+                if (!M1_krympbarRBJa.IsChecked && !M1_krympbarRBNej.IsChecked)
+                {
+                    await this.DisplayAlert("Valideringsfejl", "Du skal tage stilling til om M1 skal være med krymp eller ej.", "OK");
+                    return;
+                } else
+                {
+                    orderTable.M1Shrink = M1_krympbarRBJa.IsChecked;
+                }
+            }
+            // M1 Mastic:
+            orderTable.M1LoadedMastic = M1_Mastic != null && M1_Mastic.IsChecked;
+
+            // T1 Krymp:
+            if (T1_krympbarRBJa != null && T1_krympbarRBNej != null)
+            {
+                if (!T1_krympbarRBJa.IsChecked && !T1_krympbarRBNej.IsChecked)
+                {
+                    await this.DisplayAlert("Valideringsfejl", "Du skal tage stilling til om T1 skal være med krymp eller ej.", "OK");
+                    return;
+                }
+                else
+                {
+                    orderTable.T1Shrink = T1_krympbarRBJa.IsChecked;
+                }
+            }
+            // T1 Mastic:
+            orderTable.T1LoadedMastic = T1_Mastic != null && T1_Mastic.IsChecked;
+            // T1 Anboring:
+            orderTable.T1Drilling = T1_Anboring != null && T1_Anboring.IsChecked;
+
             GoFutherButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
             OrderActivityIndicator.IsVisible = true;
 
             try
             {
-                OrderTable orderTable = new OrderTable();
                 orderTable.ContactPerson = Settings.ContactPersonId;
                 orderTable.ConfigSeries = configSerie.KeyName;
                 orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
                 orderTable.Debtor = Settings.DebtorId;
 
-
-
-                foreach (var child in EntriesStacklayout.Children)
+                foreach (var child in allEntries)
                 {
                     if (child is Entry)
                     {
@@ -471,90 +507,6 @@ namespace LykatekXamarinApp.Views
             catch (Exception exception)
             {   
                 Logger.log("GoFuther_Clicked", exception.Message + "\n" + exception.StackTrace.ToString());
-                Console.WriteLine("-----");
-                Console.WriteLine(exception.Message);
-                Console.WriteLine(exception.StackTrace);
-                Console.WriteLine("-----");
-                GoFutherButton.IsEnabled = true;
-                OrderActivityIndicator.IsRunning = false;
-                OrderActivityIndicator.IsVisible = false;
-                await this.DisplayAlert("Fejl", "Der skete en uventet fejl, prøv at sende bestillingen igen", "OK");
-            }
-        }
-
-        public async void GoFuther_ClickedOld(object sender, EventArgs e)
-        {
-            GoFutherButton.IsEnabled = false;
-            OrderActivityIndicator.IsRunning = true;
-            OrderActivityIndicator.IsVisible = true;
-            try
-            {
-                OrderTable orderTable = new OrderTable();
-                orderTable.ContactPerson = Settings.ContactPersonId;
-                orderTable.ConfigSeries = configSerie.KeyName;
-                orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
-                orderTable.Debtor = Settings.DebtorId;
-
-                var M1 = new Dictionary<string, string>();
-                var M2 = new Dictionary<string, string>();
-                var T1 = new Dictionary<string, string>();
-                var T2 = new Dictionary<string, string>();
-
-                foreach (RelevantOrderProperty field in GetRelevantProps())
-                {
-                    var orderTableProp = orderTable.GetType().GetProperty(field.Name);
-
-                    if (orderTableProp != null)
-                    {
-                        foreach (var child in EntriesStacklayout.Children)
-                        {
-                            if (child is Entry)
-                            {
-                                Entry currentEntry = child as Entry;
-                                if (currentEntry.ClassId == field.Name)
-                                {
-                                    orderTableProp.SetValue(orderTable, currentEntry.Text);
-
-
-                                    Console.WriteLine("#############################");
-                                    Console.WriteLine(field.Name.Substring(0, 2));
-                                    Console.WriteLine("#############################");
-
-                                    switch (field.Name.Substring(0, 2))
-                                    {
-                                        case "M1":
-                                            M1.Add(field.Name, currentEntry.Text);
-                                            break;
-                                        case "M2":
-                                            M2.Add(field.Name, currentEntry.Text);
-                                            break;
-                                        case "T1":
-                                            T1.Add(field.Name, currentEntry.Text);
-                                            break;
-                                        case "T2":
-                                            T2.Add(field.Name, currentEntry.Text);
-                                            break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                var _M1 = M1;
-                var _M2 = M2;
-                var _T1 = T1;
-                var _T2 = T2;
-
-                await Navigation.PushAsync(new FinalizeOrderPage(orderTable));
-
-                GoFutherButton.IsEnabled = true;
-                OrderActivityIndicator.IsRunning = false;
-                OrderActivityIndicator.IsVisible = false;
-            }
-            catch (Exception exception)
-            {
-                Logger.log("SendOrder_Clicked", exception.Message + "\n" + exception.StackTrace.ToString());
                 Console.WriteLine("-----");
                 Console.WriteLine(exception.Message);
                 Console.WriteLine(exception.StackTrace);
