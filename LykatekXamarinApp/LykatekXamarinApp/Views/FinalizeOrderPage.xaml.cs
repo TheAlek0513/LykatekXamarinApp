@@ -1,10 +1,6 @@
 ﻿using LykatecMobileApp.Util;
 using LykatekXamarinApp.Models.Uniconta;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Uniconta.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,13 +20,13 @@ namespace LykatekXamarinApp.Views
         {
             ot = orderTable;
             InitializeComponent();
-
         }
 
         public async void SendOrder_Clicked(object sender, EventArgs e)
         {
             SendOrderButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
+            OrderActivityIndicator.IsVisible = true;
             ot.Comment = Description.Text;
             ot.DeliveryAddress = DeliveryStreet.Text;
             ot.ZipCode = DeliveryZipCode.Text;
@@ -50,6 +46,7 @@ namespace LykatekXamarinApp.Views
 
             SendOrderButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
+            OrderActivityIndicator.IsVisible = true;
 
             await Navigation.PushModalAsync(new OrderSuccessfullySentPage());
         }

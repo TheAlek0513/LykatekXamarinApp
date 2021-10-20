@@ -40,12 +40,13 @@
 
                     <Label IsVisible="False" x:Name="DeliveryCityLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="By" />
                     <Entry IsVisible="False" x:Name="DeliveryCity" TabIndex="10" ReturnType="Next" Placeholder="E.g. Aalborg" Keyboard="Text"></Entry>
-                    
-                    <!-- Loading -->
-                    <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
 
-                    <!-- Send Order Btn -->
-                    <Button TabIndex="11" x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
+                    <!-- Submit Button & Loading Indicator -->
+                    <StackLayout>
+                        <ActivityIndicator IsVisible="False" IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
+                        <Button Margin="2" BackgroundColor="#cccccc" BorderWidth="1" BorderColor="Black" FontSize="20" FontAttributes="Bold" Padding="40" TabIndex="11" x:Name="SendOrderButton" Text="Send bestilling" Clicked="SendOrder_Clicked"/>
+                    </StackLayout>
+                    
                 </StackLayout>
             </ScrollView>
         </StackLayout>

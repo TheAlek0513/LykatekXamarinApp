@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Windows;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LykatecMobileApp.Util;
 using LykatekXamarinApp.Models.Uniconta;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Reflection;
-using System.Dynamic;
 using LykatekXamarinApp.Models;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using LykatekXamarinApp.Util;
-using Uniconta.Common;
 
 namespace LykatekXamarinApp.Views
 {
@@ -94,7 +86,7 @@ namespace LykatekXamarinApp.Views
                         {
                             for (int i = 0; i < value; i++) // måske, måske ikke ?
                             {
-                                configSerieFields.Add(new RelevantOrderProperty() { Name = prop.Name, DisplayName = displayName });
+                                configSerieFields.Add(new RelevantOrderProperty() { Name = prop.Name, DisplayName = displayName, Value = value });
                             }
                         }
                     }
@@ -116,7 +108,7 @@ namespace LykatekXamarinApp.Views
                     entryColour = attemptColor;
                 }
 
-                Label label = new Label()
+                var label = new Label()
                 {
                     Text = field.DisplayName,
                     FontSize = 18,
@@ -124,8 +116,8 @@ namespace LykatekXamarinApp.Views
                     FontAttributes = FontAttributes.Bold,
                     TextColor = Color.FromHex(entryColour)
                 };
-
-                Entry entry = new Entry() {
+                var entry = new Entry()
+                {
                     Placeholder = field.DisplayName,
                     Keyboard = Keyboard.Numeric,
                     ClassId = field.Name,
@@ -134,8 +126,19 @@ namespace LykatekXamarinApp.Views
                     TextColor = Color.FromHex(entryColour)
                 };
 
-                EntriesStacklayout.Children.Add(label);
-                EntriesStacklayout.Children.Add(entry);
+                Frame frame = new Frame()
+                {
+                    BorderColor = Color.FromHex(entryColour),
+                    Content = new StackLayout()
+                    {
+                        Children =
+                        {
+                            label, entry
+                        }
+                    }
+                };
+
+                EntriesStacklayout.Children.Add(frame);
 
                 if (LastTabIndex == 1)
                 {
@@ -144,7 +147,8 @@ namespace LykatekXamarinApp.Views
             }
         }
 
-        protected override void OnAppearing() {
+        protected override void OnAppearing()
+        {
             if (firstEntryField != null)
             {
                 firstEntryField.Focus();
@@ -155,6 +159,8 @@ namespace LykatekXamarinApp.Views
         {
             GoFutherButton.IsEnabled = false;
             OrderActivityIndicator.IsRunning = true;
+            OrderActivityIndicator.IsVisible = true;
+
             try
             {
                 OrderTable orderTable = new OrderTable();
@@ -162,6 +168,176 @@ namespace LykatekXamarinApp.Views
                 orderTable.ConfigSeries = configSerie.KeyName;
                 orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
                 orderTable.Debtor = Settings.DebtorId;
+
+                foreach (var child in EntriesStacklayout.Children)
+                {
+                    if (child is Entry)
+                    {
+                        Entry currentEntry = child as Entry;
+
+                        switch (currentEntry.ClassId)
+                        {
+                            case "M1Dim":
+                                if (string.IsNullOrEmpty(orderTable.M1Nominel))
+                                {
+                                    orderTable.M1Nominel = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M1Nominel += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M1Length":
+                                if (string.IsNullOrEmpty(orderTable.M1Length))
+                                {
+                                    orderTable.M1Length = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M1Length += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M1Degrees":
+                                if (string.IsNullOrEmpty(orderTable.M1Degrees))
+                                {
+                                    orderTable.M1Degrees = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M1Degrees += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M1TotalLength":
+                                if (string.IsNullOrEmpty(orderTable.M1LengthTotal))
+                                {
+                                    orderTable.M1LengthTotal = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M1LengthTotal += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M2Dim":
+                                if (string.IsNullOrEmpty(orderTable.M2Nominel))
+                                {
+                                    orderTable.M2Nominel = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M2Nominel += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M2Length":
+                                if (string.IsNullOrEmpty(orderTable.M2Length))
+                                {
+                                    orderTable.M2Length = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M2Length += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M2Degrees":
+                                if (string.IsNullOrEmpty(orderTable.M2Degrees))
+                                {
+                                    orderTable.M2Degrees = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M2Degrees += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "M2TotalLength":
+                                if (string.IsNullOrEmpty(orderTable.M2LengthTotal))
+                                {
+                                    orderTable.M2LengthTotal = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.M2LengthTotal += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "T1Dim":
+                                if (string.IsNullOrEmpty(orderTable.T1Nominel))
+                                {
+                                    orderTable.T1Nominel = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.T1Nominel += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "T1Length":
+                                if (string.IsNullOrEmpty(orderTable.T1Length))
+                                {
+                                    orderTable.T1Length = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.T1Length += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "T1Degrees":
+                                if (string.IsNullOrEmpty(orderTable.T1Degrees))
+                                {
+                                    orderTable.T1Degrees = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.T1Degrees += ";" + currentEntry.Text;
+                                }
+                                break;
+                            case "T1TotalLength":
+                                if (string.IsNullOrEmpty(orderTable.T1LengthTotal))
+                                {
+                                    orderTable.T1LengthTotal = currentEntry.Text;
+                                }
+                                else
+                                {
+                                    orderTable.T1LengthTotal += ";" + currentEntry.Text;
+                                }
+                                break;
+                        }
+                    }
+                }
+
+                await Navigation.PushAsync(new FinalizeOrderPage(orderTable));
+
+                GoFutherButton.IsEnabled = true;
+                OrderActivityIndicator.IsRunning = false;
+                OrderActivityIndicator.IsVisible = false;
+            }
+            catch (Exception exception)
+            {   
+                Logger.log("GoFuther_Clicked", exception.Message + "\n" + exception.StackTrace.ToString());
+                Console.WriteLine("-----");
+                Console.WriteLine(exception.Message);
+                Console.WriteLine(exception.StackTrace);
+                Console.WriteLine("-----");
+                GoFutherButton.IsEnabled = true;
+                OrderActivityIndicator.IsRunning = false;
+                OrderActivityIndicator.IsVisible = false;
+                await this.DisplayAlert("Fejl", "Der skete en uventet fejl, prøv at sende bestillingen igen", "OK");
+            }
+        }
+
+        public async void GoFuther_ClickedOld(object sender, EventArgs e)
+        {
+            GoFutherButton.IsEnabled = false;
+            OrderActivityIndicator.IsRunning = true;
+            OrderActivityIndicator.IsVisible = true;
+            try
+            {
+                OrderTable orderTable = new OrderTable();
+                orderTable.ContactPerson = Settings.ContactPersonId;
+                orderTable.ConfigSeries = configSerie.KeyName;
+                orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
+                orderTable.Debtor = Settings.DebtorId;
+
+                var M1 = new Dictionary<string, string>();
+                var M2 = new Dictionary<string, string>();
+                var T1 = new Dictionary<string, string>();
+                var T2 = new Dictionary<string, string>();
 
                 foreach (RelevantOrderProperty field in GetRelevantProps())
                 {
@@ -177,16 +353,43 @@ namespace LykatekXamarinApp.Views
                                 if (currentEntry.ClassId == field.Name)
                                 {
                                     orderTableProp.SetValue(orderTable, currentEntry.Text);
+
+
+                                    Console.WriteLine("#############################");
+                                    Console.WriteLine(field.Name.Substring(0, 2));
+                                    Console.WriteLine("#############################");
+
+                                    switch (field.Name.Substring(0, 2))
+                                    {
+                                        case "M1":
+                                            M1.Add(field.Name, currentEntry.Text);
+                                            break;
+                                        case "M2":
+                                            M2.Add(field.Name, currentEntry.Text);
+                                            break;
+                                        case "T1":
+                                            T1.Add(field.Name, currentEntry.Text);
+                                            break;
+                                        case "T2":
+                                            T2.Add(field.Name, currentEntry.Text);
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
+                var _M1 = M1;
+                var _M2 = M2;
+                var _T1 = T1;
+                var _T2 = T2;
+
                 await Navigation.PushAsync(new FinalizeOrderPage(orderTable));
 
                 GoFutherButton.IsEnabled = true;
                 OrderActivityIndicator.IsRunning = false;
+                OrderActivityIndicator.IsVisible = false;
             }
             catch (Exception exception)
             {
@@ -197,6 +400,7 @@ namespace LykatekXamarinApp.Views
                 Console.WriteLine("-----");
                 GoFutherButton.IsEnabled = true;
                 OrderActivityIndicator.IsRunning = false;
+                OrderActivityIndicator.IsVisible = false;
                 await this.DisplayAlert("Fejl", "Der skete en uventet fejl, prøv at sende bestillingen igen", "OK");
             }
         }

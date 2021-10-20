@@ -10,11 +10,18 @@
                 <StackLayout x:Name="EntriesStacklayout">
                 </StackLayout>
 
-                <Label x:Name="TotalItemCountLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="Antal der ønskes" />
-                <Entry x:Name="TotalItemCount" Text="1" TabIndex="{Binding LastTabIndex}" ReturnType="Next" Placeholder="E.g. 1, 2 eller 3." Keyboard="Numeric"></Entry>
+                <Frame BorderColor="Black">
+                    <StackLayout>
+                        <Label x:Name="TotalItemCountLabel" TextColor="Black" FontAttributes="Bold" Padding="2" FontSize="18" Text="Antal der ønskes" />
+                        <Entry x:Name="TotalItemCount" Text="1" TextColor="Black" TabIndex="{Binding LastTabIndex}" ReturnType="Next" Placeholder="E.g. 1, 2 eller 3." Keyboard="Numeric"></Entry>
+                    </StackLayout>
+                </Frame>
 
-                <ActivityIndicator IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
-                <Button x:Name="GoFutherButton" Text="Gå videre" Clicked="GoFuther_Clicked"/>
+                <StackLayout>
+                    <ActivityIndicator IsVisible="False" IsRunning="False" x:Name="OrderActivityIndicator" Color="#000000"/>
+                    <Button Margin="2" BackgroundColor="#cccccc" BorderWidth="1" BorderColor="Black" FontSize="20" FontAttributes="Bold" Padding="40" x:Name="GoFutherButton" Text="Gå videre" Clicked="GoFuther_Clicked"/>
+                </StackLayout>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
