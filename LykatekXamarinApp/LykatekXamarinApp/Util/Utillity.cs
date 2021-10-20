@@ -92,6 +92,21 @@ namespace LykatecMobileApp.Util
             return (await Settings.CrudApi.Query<ConfigGroup>()).ToList();
         }
 
+        public static async Task<List<UserDocsClient>> getUserDocsClient()
+        {
+            var UserDocs = new UserDocsClient { };
+            await Settings.crudApi.Read(UserDocs );
+            return null;
+        }
+
+        public static async Task<InvItemClient> getInvItemWithPictures()
+        {
+            var itemClients = (await Settings.CrudApi.Query<InvItemClient>()).ToList();
+            var itemClient = itemClients.Find(x => x.Name == "Test Billeder");
+            var userA = itemClient.UserAttachment;
+            return itemClient;
+        }
+
         public static async Task SyncConfigSeries()
         {
             Settings.ConfigSeries = (await Settings.CrudApi.Query<ConfigSeries>()).ToList();
