@@ -55,7 +55,7 @@ namespace LykatekXamarinApp.Views
                     Settings.DebtorId = authenticatedContactPerson.DCAccount;
 
                     App.SettingsDatabase.SaveSettings();
-                    var syncResult = await Utillity.SyncAll();
+                   var syncResult = await Utillity.SyncAll();
 
                     if (!syncResult)
                     {
@@ -64,7 +64,7 @@ namespace LykatekXamarinApp.Views
                         LoginButton.IsEnabled = true;
                         return;
                     }
-
+                    var testItems = await Utillity.getInvItemWithPictures();
                     Application.Current.MainPage = new NavigationPage(new StartPage());
                     LoginActivityIndicator.IsRunning = false;
                 }
