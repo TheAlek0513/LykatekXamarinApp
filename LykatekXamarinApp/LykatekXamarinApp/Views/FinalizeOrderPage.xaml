@@ -8,21 +8,21 @@
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout Padding="10">
                     <!-- Order Meta -->
-                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Din reference" />
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Dit reference nr. / navn:" />
                     <Entry x:Name="ContactReference" TabIndex="1" ReturnType="Next" Placeholder="Skriv din reference her.." Keyboard="Text"></Entry>
 
                     <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kommentar:" />
                     <Editor TabIndex="2" Placeholder="Skriv din kommentar her.." x:Name="Description" AutoSize="TextChanges" Keyboard="Text"></Editor>
 
                     <!-- Secondary Contact Person -->
-                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kontakt Navn:" />
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kontaktnavn:" />
                     <Entry x:Name="ContactName" TabIndex="3" ReturnType="Next" Placeholder="E.g. Jens Hansen" Keyboard="Text"></Entry>
                     <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Kontakt telefon" />
                     <Entry x:Name="ContactPhone" TabIndex="4" ReturnType="Next" Placeholder="(+45) xx xx xx xx" Keyboard="Telephone"></Entry>
 
-                    <!-- Order options -->
+                    <!-- Order options --><!--
                     <CheckBox Scale="2" TabIndex="5" x:Name="PriorityOrder" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0"/>
-                    <Label FontSize="18" FontAttributes="Bold" Text="Hasteordre?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
+                    <Label FontSize="18" FontAttributes="Bold" Text="Hasteordre?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />-->
 
                     <CheckBox TabIndex="6" Scale="2"     CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                     <Label FontSize="18" FontAttributes="Bold" Text="Ønskes levering?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>

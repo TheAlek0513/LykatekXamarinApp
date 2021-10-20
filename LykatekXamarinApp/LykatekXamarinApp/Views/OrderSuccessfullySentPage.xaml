@@ -25,7 +25,7 @@
                     AbsoluteLayout.LayoutBounds=".5,.80,300,200"
                     AbsoluteLayout.LayoutFlags="PositionProportional">
 
-                    <Button Text="Kom tilbage" FontSize="20" Clicked="ReturnButton_Clicked" BackgroundColor="Transparent" />
+                    <Button Text="Gå til forside" FontSize="20" Clicked="ReturnButton_Clicked" BackgroundColor="Transparent" />
                 </Grid>
             </AbsoluteLayout>
         </StackLayout>

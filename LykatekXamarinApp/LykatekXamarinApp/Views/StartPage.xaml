@@ -15,7 +15,7 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ViewGroupList_Clicked" NumberOfTapsRequired="1" />
                     </Frame.GestureRecognizers>
-                    <Label FontSize="15" Padding="5" Text="Opret ny bestilling" />
+                    <Label FontSize="15" Padding="5" Text="Opret bestilling" />
                 </Frame>
 
                 <Frame BorderColor="#ccc"
@@ -25,7 +25,7 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ViewContactPage_Clicked" NumberOfTapsRequired="1" />
                     </Frame.GestureRecognizers>
-                    <Label FontSize="15" Padding="5" Text="Kontakt os" />
+                    <Label FontSize="15" Padding="5" Text="Kontakt Lykatec" />
                 </Frame>
 
                 <Frame BorderColor="#ccc"

@@ -32,7 +32,7 @@ namespace LykatekXamarinApp.Views
             ot.ZipCode = DeliveryZipCode.Text;
             ot.City = DeliveryCity.Text;
             ot.YourReference = ContactReference.Text;
-            ot.PriorityOrder = PriorityOrder.IsChecked;
+            //ot.PriorityOrder = PriorityOrder.IsChecked;
             ot.DeliveryDate = DatePickerInput.Date;
             ot.CreatedDateTime = DateTime.Now;
             ot.SecondaryContact = String.Format("{0} {1}", ContactName.Text, ContactPhone.Text);
