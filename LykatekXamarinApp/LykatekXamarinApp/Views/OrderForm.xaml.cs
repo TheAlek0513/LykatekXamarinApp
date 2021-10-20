@@ -97,10 +97,44 @@ namespace LykatekXamarinApp.Views
 
         public void AddEntries()
         {
+            int M1Count = 0;
+            int T1Count = 0;
+            int M2Count = 0;
+            int T2Count = 0;
+
+            RadioButton M1_krympbarRBJa = null;
+            RadioButton M1_krympbarRBNej = null;
+            CheckBox M1_Mastic = null;
+
+            RadioButton T1_krympbarRBJa = null;
+            RadioButton T1_krympbarRBNej = null;
+            CheckBox T1_Mastic = null;
+            CheckBox T1_Anboring = null;
+
+
+            foreach (RelevantOrderProperty field in GetRelevantProps())
+            {
+                switch(field.Name.Substring(0,2))
+                {
+                    case "M1":
+                        M1Count++;
+                        break;
+                    case "T1":
+                        T1Count++;
+                        break;
+                    case "M2":
+                        M2Count++;
+                        break;
+                    case "T2":
+                        T2Count++;
+                        break;
+                }
+            }
+            int index = 0;
             foreach (RelevantOrderProperty field in GetRelevantProps())
             {
                 int currentTabIndex = LastTabIndex++;
-
+                index++;
                 string entryColour = "#000000";
                 string attemptColor = entryColour;
                 if (entryColours.TryGetValue(field.Name.Substring(0, 2), out attemptColor))
@@ -108,6 +142,8 @@ namespace LykatekXamarinApp.Views
                     entryColour = attemptColor;
                 }
 
+
+                
                 var label = new Label()
                 {
                     Text = field.DisplayName,
@@ -137,9 +173,132 @@ namespace LykatekXamarinApp.Views
                         }
                     }
                 };
+                 
 
                 EntriesStacklayout.Children.Add(frame);
 
+                switch (field.Name.Substring(0,2))
+                {
+                    case "M1":
+                        if (index == M1Count)
+                        {
+                            Label M1_krympbar = new Label
+                            {
+                                Text = "M1 Krympbar",
+                                FontSize = 18,
+                                Padding = 2,
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.FromHex(entryColour)
+                            };
+                            M1_krympbarRBJa = new RadioButton
+                            {
+                                GroupName = "M1_krymp",
+                                Content = "Ja",
+                                Value = "1"
+                            }; 
+                            M1_krympbarRBNej = new RadioButton
+                            {
+                                GroupName = "M1_krymp",
+                                Content = "Nej",
+                                Value = "0"
+                            };
+
+                            Label M1_MasticLabel = new Label
+                            {
+                                Text = "M1 ilagt mastic",
+                                FontSize = 18,
+                                Padding = 2,
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.FromHex(entryColour)
+                            };
+
+                            M1_Mastic = new CheckBox
+                            {
+                                
+                            };
+                            Frame frame1 = new Frame
+                            {
+                                BorderColor = Color.FromHex(entryColour),
+                                Content = new StackLayout()
+                                {
+                                    Children =
+                                    {
+                                        M1_krympbar, M1_krympbarRBJa,M1_krympbarRBNej, M1_MasticLabel, M1_Mastic
+                                    }
+                                }
+                            };
+                            EntriesStacklayout.Children.Add(frame1);
+                            index = 0;
+                        }
+                        break;
+                    case "T1":
+                        if (index == T1Count)
+                        {
+                            Label T1_krympbar = new Label
+                            {
+                                Text = "T1 Krympbar",
+                                FontSize = 18,
+                                Padding = 2,
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.FromHex(entryColour)
+                            };
+                            T1_krympbarRBJa = new RadioButton
+                            {
+                                GroupName = "T1_krymp",
+                                Content = "Ja",
+                                Value = "1"
+                            };
+                            T1_krympbarRBNej = new RadioButton
+                            {
+                                GroupName = "T1_krymp",
+                                Content = "Nej",
+                                Value = "0"
+                            };
+
+                            Label T1_MasticLabel = new Label
+                            {
+                                Text = "T1 ilagt mastic",
+                                FontSize = 18,
+                                Padding = 2,
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.FromHex(entryColour)
+                            };
+
+                            T1_Mastic = new CheckBox
+                            {
+
+                            };
+
+                            Label T1_AnboringLabel = new Label
+                            {
+                                Text = "T1 anboring",
+                                FontSize = 18,
+                                Padding = 2,
+                                FontAttributes = FontAttributes.Bold,
+                                TextColor = Color.FromHex(entryColour)
+                            };
+
+                            T1_Anboring = new CheckBox
+                            {
+
+                            };
+
+                            Frame frameT = new Frame
+                            {
+                                BorderColor = Color.FromHex(entryColour),
+                                Content = new StackLayout()
+                                {
+                                    Children =
+                                    {
+                                        T1_krympbar, T1_krympbarRBJa,T1_krympbarRBNej,T1_MasticLabel,T1_Mastic, T1_AnboringLabel, T1_Anboring
+                                    }
+                                }
+                            };
+                            EntriesStacklayout.Children.Add(frameT);
+                            index = 0;
+                        }
+                        break;
+                }
                 if (LastTabIndex == 1)
                 {
                     firstEntryField = entry;
@@ -168,6 +327,8 @@ namespace LykatekXamarinApp.Views
                 orderTable.ConfigSeries = configSerie.KeyName;
                 orderTable.Quantity = Int32.Parse(TotalItemCount.Text).ToString();
                 orderTable.Debtor = Settings.DebtorId;
+
+
 
                 foreach (var child in EntriesStacklayout.Children)
                 {

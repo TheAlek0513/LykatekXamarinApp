@@ -24,7 +24,7 @@
                     <CheckBox Scale="2" TabIndex="5" x:Name="PriorityOrder" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0"/>
                     <Label FontSize="18" FontAttributes="Bold" Text="Hasteordre?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
 
-                    <CheckBox TabIndex="6" Scale="2" CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                    <CheckBox TabIndex="6" Scale="2"     CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                     <Label FontSize="18" FontAttributes="Bold" Text="Ønskes levering?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
 
                     <!-- Delivery date -->

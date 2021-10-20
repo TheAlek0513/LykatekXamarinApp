@@ -21,8 +21,8 @@ namespace LykatekXamarinApp
                 Application.Current.MainPage = new LoginPage();
                 return;
             }
-            MainPage = new NavigationPage(new StartPage());
             _ = Utillity.SyncAll();
+            MainPage = new NavigationPage(new StartPage());
         }
 
         public static SettingsDatabaseController SettingsDatabase
