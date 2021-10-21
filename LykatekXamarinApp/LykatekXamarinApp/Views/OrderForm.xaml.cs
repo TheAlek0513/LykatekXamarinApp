@@ -170,6 +170,7 @@ namespace LykatekXamarinApp.Views
                 Frame frame = new Frame()
                 {
                     BorderColor = Color.FromHex(entryColour),
+                    Padding = 12,
                     Content = new StackLayout()
                     {
                         Children =
@@ -290,6 +291,7 @@ namespace LykatekXamarinApp.Views
                             Frame frameT = new Frame
                             {
                                 BorderColor = Color.FromHex(entryColour),
+                                
                                 Content = new StackLayout()
                                 {
                                     Children =

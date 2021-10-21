@@ -55,17 +55,6 @@ namespace LykatekXamarinApp.Views
         {
             if (DeliveryCheckbox.IsChecked)
             {
-                DeliveryStreet.IsVisible = true;
-                DeliveryStreetLabel.IsVisible = true;
-
-                DeliveryZipCode.IsVisible = true;
-                DeliveryZipCodeLabel.IsVisible = true;
-
-                DeliveryCity.IsVisible = true;
-                DeliveryCityLabel.IsVisible = true;
-
-            } else
-            {
                 DeliveryStreet.IsVisible = false;
                 DeliveryStreetLabel.IsVisible = false;
 
@@ -74,6 +63,18 @@ namespace LykatekXamarinApp.Views
 
                 DeliveryCity.IsVisible = false;
                 DeliveryCityLabel.IsVisible = false;
+
+            } else
+            {
+
+                DeliveryStreet.IsVisible = true;
+                DeliveryStreetLabel.IsVisible = true;
+
+                DeliveryZipCode.IsVisible = true;
+                DeliveryZipCodeLabel.IsVisible = true;
+
+                DeliveryCity.IsVisible = true;
+                DeliveryCityLabel.IsVisible = true;
             }
         }
     }
