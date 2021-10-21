@@ -55,18 +55,7 @@ namespace LykatekXamarinApp.Views
         {
             if (DeliveryCheckbox.IsChecked)
             {
-                DeliveryStreet.IsVisible = false;
-                DeliveryStreetLabel.IsVisible = false;
-
-                DeliveryZipCode.IsVisible = false;
-                DeliveryZipCodeLabel.IsVisible = false;
-
-                DeliveryCity.IsVisible = false;
-                DeliveryCityLabel.IsVisible = false;
-
-            } else
-            {
-
+                DeliveryDateLabel.Text = "Ønsked leverings dag";
                 DeliveryStreet.IsVisible = true;
                 DeliveryStreetLabel.IsVisible = true;
 
@@ -75,6 +64,18 @@ namespace LykatekXamarinApp.Views
 
                 DeliveryCity.IsVisible = true;
                 DeliveryCityLabel.IsVisible = true;
+
+            } else
+            {
+                DeliveryDateLabel.Text = "Afhentnings dag";
+                DeliveryStreet.IsVisible = false;
+                DeliveryStreetLabel.IsVisible = false;
+
+                DeliveryZipCode.IsVisible = false;
+                DeliveryZipCodeLabel.IsVisible = false;
+
+                DeliveryCity.IsVisible = false;
+                DeliveryCityLabel.IsVisible = false;
             }
         }
     }

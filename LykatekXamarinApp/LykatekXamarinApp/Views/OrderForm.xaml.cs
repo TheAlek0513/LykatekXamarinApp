@@ -82,6 +82,19 @@ namespace LykatekXamarinApp.Views
         public OrderForm(ConfigSeries cs)
         {
             configSerie = cs;
+
+            //switch (configSerie.KeyName)
+            //{
+            //    case "T-muffe gr° parallel afgr":
+            //        ProduktImage.Source = ImageSource.FromResource("drawable/T_muffe_paralllell_afgrening.png");
+            //        break;
+            //    case "T-muffe u afgrening":
+            //        ProduktImage.Source = "T_muffe_afgrening.png";
+            //        break;
+            //    default:
+            //        ProduktImage.Source = "NoImageAvailable.jpg";
+            //        break;
+            //}
             InitializeComponent();
             AddEntries();
         }
