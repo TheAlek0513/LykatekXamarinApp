@@ -1,6 +1,8 @@
 ﻿using LykatecMobileApp.Util;
 using LykatekXamarinApp.Models.Uniconta;
+using LykatekXamarinApp.Util;
 using System;
+using System.Threading.Tasks;
 using Uniconta.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -77,6 +79,12 @@ namespace LykatekXamarinApp.Views
                 DeliveryCity.IsVisible = false;
                 DeliveryCityLabel.IsVisible = false;
             }
+        }
+
+        public async void GetLocation_Button(object sender, EventArgs e)
+        {
+            string address = await GeoCode.getLocation();
+            ot.Address = address;
         }
     }
 }

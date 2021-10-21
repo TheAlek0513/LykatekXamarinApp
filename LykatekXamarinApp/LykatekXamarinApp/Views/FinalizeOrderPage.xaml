@@ -28,7 +28,9 @@
                     <!-- Delivery date -->
                     <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Ønsket leveringsdato" x:Name="DeliveryDateLabel"/>
                     <DatePicker TabIndex="7" Format="dd/MM/yyyy" x:Name="DatePickerInput" MinimumDate="{Binding minDate}"></DatePicker>
-
+                    
+                    <Button Text="Geo Here" Clicked="GetLocation_Button" x:Name="GeoLocatioBT" IsVisible="false"></Button>
+                    
                     <!-- Street and address -->
                     <Label IsVisible="False" x:Name="DeliveryStreetLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="Adresse" />
                     <Entry IsVisible="False" x:Name="DeliveryStreet" TabIndex="8" ReturnType="Next" Placeholder="E.g. Vestergade 55" Keyboard="Text"></Entry>
