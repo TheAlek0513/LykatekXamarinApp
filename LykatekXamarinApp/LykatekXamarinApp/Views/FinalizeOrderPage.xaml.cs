@@ -67,6 +67,8 @@ namespace LykatekXamarinApp.Views
                 DeliveryCity.IsVisible = true;
                 DeliveryCityLabel.IsVisible = true;
 
+                GeoLocatioBT.IsVisible = true;
+
             } else
             {
                 DeliveryDateLabel.Text = "Afhentnings dag";
@@ -78,13 +80,21 @@ namespace LykatekXamarinApp.Views
 
                 DeliveryCity.IsVisible = false;
                 DeliveryCityLabel.IsVisible = false;
+
+                GeoLocatioBT.IsVisible = false; 
             }
         }
 
         public async void GetLocation_Button(object sender, EventArgs e)
         {
-            string address = await GeoCode.getLocation();
-            ot.Address = address;
+            string[] address = await GeoCode.getLocation();
+            if (address != null)
+            {
+                string[] addressZipAndTown = address.GetValue(1).ToString().Split(' ');
+                DeliveryStreet.Text = address.GetValue(0).ToString();
+                DeliveryZipCode.Text = addressZipAndTown[1].ToString();
+                DeliveryCity.Text = addressZipAndTown[2].ToString();
+            }
         }
     }
 }
