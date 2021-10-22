@@ -81,7 +81,7 @@ namespace LykatekXamarinApp.Views
                 DeliveryCity.IsVisible = false;
                 DeliveryCityLabel.IsVisible = false;
 
-                GeoLocatioBT.IsVisible = false; 
+                GeoLocatioBT.IsVisible = false;
             }
         }
 
@@ -94,6 +94,10 @@ namespace LykatekXamarinApp.Views
                 DeliveryStreet.Text = address.GetValue(0).ToString();
                 DeliveryZipCode.Text = addressZipAndTown[1].ToString();
                 DeliveryCity.Text = addressZipAndTown[2].ToString();
+            }
+            else
+            {
+                await this.DisplayAlert("GPSfejl", "Der Skete en fejl, ved brug af GPS", "OK");
             }
         }
     }

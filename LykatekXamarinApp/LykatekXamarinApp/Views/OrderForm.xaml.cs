@@ -32,6 +32,7 @@ namespace LykatekXamarinApp.Views
         };
         private Entry firstEntryField = null;
         public int LastTabIndex = 0;
+        public string ImageProdukt ="";
 
         private RadioButton M1_krympbarRBJa = null;
         private RadioButton M1_krympbarRBNej = null;
@@ -82,20 +83,20 @@ namespace LykatekXamarinApp.Views
         public OrderForm(ConfigSeries cs)
         {
             configSerie = cs;
-
-            //switch (configSerie.KeyName)
-            //{
-            //    case "T-muffe gr° parallel afgr":
-            //        ProduktImage.Source = ImageSource.FromResource("drawable/T_muffe_paralllell_afgrening.png");
-            //        break;
-            //    case "T-muffe u afgrening":
-            //        ProduktImage.Source = "T_muffe_afgrening.png";
-            //        break;
-            //    default:
-            //        ProduktImage.Source = "NoImageAvailable.jpg";
-            //        break;
-            //}
             InitializeComponent();
+            switch (configSerie.KeyName)
+            {
+                case "T-muffe gr° parallel afgr":
+                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/T_muffe_paralllell_afgrening.png");
+                    break;
+                case "T-muffe u afgrening":
+                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/T_muffe_afgrening.png");
+
+                    break;
+                default:
+                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/NoImageAvailable.jpg");
+                    break;
+            }
             AddEntries();
         }
 
