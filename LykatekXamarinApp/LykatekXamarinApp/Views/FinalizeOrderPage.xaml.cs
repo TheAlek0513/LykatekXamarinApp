@@ -13,15 +13,21 @@ namespace LykatekXamarinApp.Views
     public partial class FinalizeOrderPage : ContentPage
     {
         public OrderTable ot;
-        public DateTime minDate = DateTime.Now;
 
         public bool deliveryChecked = false;
         public bool urgentChecked = false;
+        public bool isPriorityOrder = false;
 
         public FinalizeOrderPage(OrderTable orderTable)
         {
             ot = orderTable;
             InitializeComponent();
+            DatePickerInput.SetValue(DatePicker.MinimumDateProperty, DateTime.Now);
+            SetPriorityOrder();
+
+            DeliveryStreet.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryAddress) ? Settings.LatestDeliveryAddress : "";
+            DeliveryCity.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryCity) ? Settings.LatestDeliveryCity : "";
+            DeliveryZipCode.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryZipCode) ? Settings.LatestDeliveryZipCode : "";
         }
 
         public async void SendOrder_Clicked(object sender, EventArgs e)
@@ -34,10 +40,17 @@ namespace LykatekXamarinApp.Views
             ot.ZipCode = DeliveryZipCode.Text;
             ot.City = DeliveryCity.Text;
             ot.YourReference = ContactReference.Text;
-            //ot.PriorityOrder = PriorityOrder.IsChecked;
+            ot.PriorityOrder = isPriorityOrder;
             ot.DeliveryDate = DatePickerInput.Date;
             ot.CreatedDateTime = DateTime.Now;
             ot.SecondaryContact = String.Format("{0} {1}", ContactName.Text, ContactPhone.Text);
+
+            if (DeliveryCheckbox.IsChecked)
+            {
+                Settings.LatestDeliveryAddress = DeliveryStreet.Text;
+                Settings.LatestDeliveryCity = DeliveryCity.Text;
+                Settings.LatestDeliveryZipCode = DeliveryZipCode.Text;
+            }
 
             ErrorCodes result = await Utillity.SendOrderTable(ot);
 
@@ -55,34 +68,17 @@ namespace LykatekXamarinApp.Views
 
         void OnDeliveryCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (DeliveryCheckbox.IsChecked)
-            {
-                DeliveryDateLabel.Text = "Ønsked leverings dag";
-                DeliveryStreet.IsVisible = true;
-                DeliveryStreetLabel.IsVisible = true;
+            DeliveryStreet.IsVisible = DeliveryCheckbox.IsChecked;
+            DeliveryStreetLabel.IsVisible = DeliveryCheckbox.IsChecked;
 
-                DeliveryZipCode.IsVisible = true;
-                DeliveryZipCodeLabel.IsVisible = true;
+            DeliveryZipCode.IsVisible = DeliveryCheckbox.IsChecked;
+            DeliveryZipCodeLabel.IsVisible = DeliveryCheckbox.IsChecked;
 
-                DeliveryCity.IsVisible = true;
-                DeliveryCityLabel.IsVisible = true;
+            DeliveryCity.IsVisible = DeliveryCheckbox.IsChecked;
+            DeliveryCityLabel.IsVisible = DeliveryCheckbox.IsChecked;
 
-                GeoLocatioBT.IsVisible = true;
-
-            } else
-            {
-                DeliveryDateLabel.Text = "Afhentnings dag";
-                DeliveryStreet.IsVisible = false;
-                DeliveryStreetLabel.IsVisible = false;
-
-                DeliveryZipCode.IsVisible = false;
-                DeliveryZipCodeLabel.IsVisible = false;
-
-                DeliveryCity.IsVisible = false;
-                DeliveryCityLabel.IsVisible = false;
-
-                GeoLocatioBT.IsVisible = false; 
-            }
+            GeoLocatioBT.IsVisible = DeliveryCheckbox.IsChecked;
+            DeliveryAddressLabel.IsVisible = DeliveryCheckbox.IsChecked;
         }
 
         public async void GetLocation_Button(object sender, EventArgs e)
@@ -95,6 +91,25 @@ namespace LykatekXamarinApp.Views
                 DeliveryZipCode.Text = addressZipAndTown[1].ToString();
                 DeliveryCity.Text = addressZipAndTown[2].ToString();
             }
+        }
+
+        private void SetPriorityOrder()
+        {
+            if (DateTime.Compare(DatePickerInput.Date, DateTime.Now.AddDays(2)) <= 0)
+            {
+                isPriorityOrder = true;
+                IsPriorityOrderNoticeLabel.IsVisible = true;
+            }
+            else
+            {
+                isPriorityOrder = false;
+                IsPriorityOrderNoticeLabel.IsVisible = false;
+            }
+        }
+
+        private void DatePickerInput_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            SetPriorityOrder();
         }
     }
 }

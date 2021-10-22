@@ -22,15 +22,24 @@
 
                     <!-- Order options -->
 
-                    <CheckBox TabIndex="6" Scale="2"     CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                    <CheckBox TabIndex="6" Scale="2" CheckedChanged="OnDeliveryCheckedChanged" x:Name="DeliveryCheckbox" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                     <Label FontSize="18" FontAttributes="Bold" Text="Ønskes levering?" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
 
                     <!-- Delivery date -->
                     <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Ønsket leveringsdato" x:Name="DeliveryDateLabel"/>
-                    <DatePicker TabIndex="7" Format="dd/MM/yyyy" x:Name="DatePickerInput" MinimumDate="{Binding minDate}"></DatePicker>
+                    <DatePicker DateSelected="DatePickerInput_DateSelected" TabIndex="7" Format="dd/MM/yyyy" x:Name="DatePickerInput"></DatePicker>
+                    <Label FontAttributes="Italic" Text="Hvis den valgte leveringsdato er inden for to dage, vil ordren blive sendt som en hasteordre." FontSize="15" TextColor="#787878"></Label>
+
+                    <StackLayout x:Name="IsPriorityOrderNoticeLabel" IsVisible="false" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                        <Image WidthRequest="24" HeightRequest="24" Source="warning.png"/>
+                        <Label Text="Ordren er en hasteordre" FontSize="20" FontAttributes="Bold" TextColor="#000000" HorizontalTextAlignment="Center" Padding="2" />
+                    </StackLayout>
+
+                    <!-- Delivery Address-->
+                    <Label FontAttributes="Bold" Padding="2" FontSize="18" Text="Leveringsadresse" x:Name="DeliveryAddressLabel" IsVisible="false" />
 
                     <!-- GPS Button -->
-                    <Button Text="Brug GPS til adresse" Clicked="GetLocation_Button" x:Name="GeoLocatioBT" IsVisible="false"></Button>
+                    <Button Text="Indsæt lokation som leveringsadresse" Image="gps.png" Clicked="GetLocation_Button" x:Name="GeoLocatioBT" IsVisible="false"></Button>
                     
                     <!-- Street and address -->
                     <Label IsVisible="False" x:Name="DeliveryStreetLabel" FontAttributes="Bold" Padding="2" FontSize="18" Text="Adresse" />
