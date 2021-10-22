@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using System.Reflection;
 using LykatekXamarinApp.Models;
 using LykatekXamarinApp.Util;
+using System.Linq;
 
 namespace LykatekXamarinApp.Views
 {
@@ -32,7 +33,6 @@ namespace LykatekXamarinApp.Views
         };
         private Entry firstEntryField = null;
         public int LastTabIndex = 0;
-        public string ImageProdukt ="";
 
         private RadioButton M1_krympbarRBJa = null;
         private RadioButton M1_krympbarRBNej = null;
@@ -48,6 +48,17 @@ namespace LykatekXamarinApp.Views
          * Grunden til at listen er nødvendigt er fordi vi ikke direkte kan foreach over EntriesStackLayout, pga. frames som gør det en smule mere besværligt.
          */
         private List<Entry> allEntries = new List<Entry>(); 
+
+        private Frame M1EntryFrames = new Frame();
+        private StackLayout M1StackLayout = new StackLayout();
+        private Frame T1EntryFrames = new Frame();
+        private StackLayout T1StackLayout = new StackLayout();
+        private Frame M2EntryFrames = new Frame();
+        private StackLayout M2StackLayout = new StackLayout();
+        private Frame T2EntryFrames = new Frame();
+        private StackLayout T2StackLayout = new StackLayout();
+
+
 
         public string GetFriendlyName(string val)
         {
@@ -193,9 +204,23 @@ namespace LykatekXamarinApp.Views
                         }
                     }
                 };
-
-                EntriesStacklayout.Children.Add(frame);
-
+                switch (entry.ClassId.Substring(0,2))
+                {
+                    case "M1":
+                        //M1EntryFrames.Add(frame);
+                        M1StackLayout.Children.Add(frame);
+                        break;
+                    case "T1":
+                        T1StackLayout.Children.Add(frame);
+                        break;
+                    case "M2":
+                        T2StackLayout.Children.Add(frame);  
+                        break;
+                    case "T2":
+                        M2StackLayout.Children.Add(frame);
+                        break;
+                }
+                //EntriesStacklayout.Children.Add(frame);
                 switch (field.Name.Substring(0,2))
                 {
                     case "M1":
@@ -246,7 +271,8 @@ namespace LykatekXamarinApp.Views
                                     }
                                 }
                             };
-                            EntriesStacklayout.Children.Add(frame1);
+                            M1StackLayout.Children.Add(frame1);
+                            //EntriesStacklayout.Children.Add(frame1);
                             index = 0;
                         }
                         break;
@@ -314,7 +340,7 @@ namespace LykatekXamarinApp.Views
                                     }
                                 }
                             };
-                            EntriesStacklayout.Children.Add(frameT);
+                            T1StackLayout.Children.Add(frameT);
                             index = 0;
                         }
                         break;
@@ -324,6 +350,30 @@ namespace LykatekXamarinApp.Views
                     firstEntryField = entry;
                 }
             }
+            if (M1StackLayout.Children.Count > 0)
+            {
+                M1EntryFrames.Content = M1StackLayout;
+                EntriesStacklayout.Children.Add(M1EntryFrames);
+            };
+            if (T1StackLayout.Children.Count > 0)
+            {
+                T1EntryFrames.Content = T1StackLayout;
+                EntriesStacklayout.Children.Add(T1EntryFrames);
+
+            };
+            if (M2StackLayout.Children.Count > 0)
+            {
+                M2EntryFrames.Content = M2StackLayout;
+                EntriesStacklayout.Children.Add(M2EntryFrames);
+
+            };
+            if (T2StackLayout.Children.Count > 0)
+            {
+                T2EntryFrames.Content = T2StackLayout;
+                EntriesStacklayout.Children.Add(T2EntryFrames);
+
+            };
+
         }
 
         protected override void OnAppearing()
