@@ -8,6 +8,7 @@
         <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout>
                 <Image Source="logo.png" />
+                <ActivityIndicator IsVisible="False" IsRunning="False" x:Name="StartPageActivityIndicator" Color="#000000"/>
                 <Frame BorderColor="#ccc"
                        CornerRadius="10"
                        HasShadow="True"

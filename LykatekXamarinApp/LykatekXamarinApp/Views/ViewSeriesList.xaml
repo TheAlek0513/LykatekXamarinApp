@@ -6,13 +6,14 @@
     <ContentPage.Content>
         <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="Center" VerticalOptions="FillAndExpand" Padding="10">
+                <ActivityIndicator IsVisible="False" IsRunning="False" x:Name="ListViewActivityIndicator" Color="#000000"/>
                 <ListView x:Name="SeriesList" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"
                       SeparatorColor="LightGray" SeparatorVisibility="Default" HasUnevenRows="True" ItemTapped="SeriesList_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" Padding="5" VerticalOptions="FillAndExpand" MinimumHeightRequest="100">
-                                    <Image Source="NoImageAvailable.jpg" WidthRequest="70" HeightRequest="70"/>
+                                    <Image Source="T_muffe_afgrening.png" WidthRequest="70" HeightRequest="70"/>
                                     <StackLayout Orientation="Vertical" Padding="2" VerticalOptions="Center">
                                         <Label Text="{Binding DisplayText}" FontSize="20" Margin="2" TextColor="Black" FontAttributes="Bold"/>
                                     </StackLayout>

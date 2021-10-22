@@ -13,8 +13,7 @@ namespace LykatekXamarinApp.Views
     public partial class ContactPage : ContentPage
     {
 
-        //public string lykaPhone = "+4560654709";
-        public string lykaEmail = "lykatec@lykatec.dk";
+        public string lykaEmail = "rl@lykatec.dk";
         public string _lykaPhone = "+4523623700";
 
         public ContactPage()
@@ -45,6 +44,11 @@ namespace LykatekXamarinApp.Views
             {
                 this.DisplayAlert("Fejl", "Der skete en uventet fejl, prøv at ringe til " + _lykaPhone, "OK");
             }
+        }
+
+        private async void GoBackButton_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage(new StartPage());
         }
     }
 }

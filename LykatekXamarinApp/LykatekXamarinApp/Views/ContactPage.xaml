@@ -8,6 +8,8 @@
             <Image Source="logo.png" />
             <Button Clicked="CallLykatec_Clicked" Text="Ring til Lykatec" Image="phone.png" />
             <Button Clicked="EmailLykatec_Clicked" Text="Send e-mail til Lykatec" Image="email.png" />
+
+            <Button Text="Tilbage" TextColor="#949494" FontSize="20" Clicked="GoBackButton_Clicked" BackgroundColor="Transparent" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

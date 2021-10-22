@@ -5,7 +5,7 @@
              Title="Ny bestilling - Indtast mål">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BorderColor="Black">
+            <Frame Margin="10" BorderColor="Black">
                 <Image x:Name="ProduktImage" Source="T_muffe_paralllell_afgrening.png"></Image>
             </Frame>
             <ScrollView VerticalOptions="FillAndExpand">

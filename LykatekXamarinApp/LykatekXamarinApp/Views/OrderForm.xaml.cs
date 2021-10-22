@@ -57,8 +57,17 @@ namespace LykatekXamarinApp.Views
         private StackLayout M2StackLayout = new StackLayout();
         private Frame T2EntryFrames = new Frame();
         private StackLayout T2StackLayout = new StackLayout();
+        private void ShowActivityIndicator()
+        {
+            OrderActivityIndicator.IsVisible = true;
+            OrderActivityIndicator.IsRunning = true;
+        }
 
-
+        private void HideActivityIndicator()
+        {
+            OrderActivityIndicator.IsVisible = false;
+            OrderActivityIndicator.IsRunning = false;
+        }
 
         public string GetFriendlyName(string val)
         {
@@ -380,7 +389,8 @@ namespace LykatekXamarinApp.Views
         {
             if (firstEntryField != null)
             {
-                firstEntryField.Focus();
+                // focus on first entry
+                //firstEntryField.Focus(); // disabled
             }
         }
 
@@ -422,8 +432,7 @@ namespace LykatekXamarinApp.Views
             orderTable.T1Drilling = T1_Anboring != null && T1_Anboring.IsChecked;
 
             GoFutherButton.IsEnabled = false;
-            OrderActivityIndicator.IsRunning = true;
-            OrderActivityIndicator.IsVisible = true;
+            ShowActivityIndicator();
 
             try
             {
@@ -567,19 +576,13 @@ namespace LykatekXamarinApp.Views
                 await Navigation.PushAsync(new FinalizeOrderPage(orderTable));
 
                 GoFutherButton.IsEnabled = true;
-                OrderActivityIndicator.IsRunning = false;
-                OrderActivityIndicator.IsVisible = false;
+                HideActivityIndicator();
             }
             catch (Exception exception)
             {   
                 Logger.log("GoFuther_Clicked", exception.Message + "\n" + exception.StackTrace.ToString());
-                Console.WriteLine("-----");
-                Console.WriteLine(exception.Message);
-                Console.WriteLine(exception.StackTrace);
-                Console.WriteLine("-----");
                 GoFutherButton.IsEnabled = true;
-                OrderActivityIndicator.IsRunning = false;
-                OrderActivityIndicator.IsVisible = false;
+                HideActivityIndicator();
                 await this.DisplayAlert("Fejl", "Der skete en uventet fejl, prøv at sende bestillingen igen", "OK");
             }
         }

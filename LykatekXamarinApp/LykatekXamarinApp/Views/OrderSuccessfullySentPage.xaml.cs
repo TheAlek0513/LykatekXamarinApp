@@ -22,5 +22,10 @@ namespace LykatekXamarinApp.Views
         {
             Application.Current.MainPage = new NavigationPage(new StartPage());
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true; // true prevent navigation back and false to allow
+        }
     }
 }

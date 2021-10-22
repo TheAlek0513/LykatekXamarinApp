@@ -1,13 +1,8 @@
-﻿using LykatekXamarinApp.Models;
-using LykatekXamarinApp.Models.Uniconta;
+﻿using LykatekXamarinApp.Models.Uniconta;
 using LykatecMobileApp.Util;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +12,19 @@ namespace LykatekXamarinApp.Views
     public partial class ViewSeriesList : ContentPage
     {
         ObservableCollection<ConfigSeries> obSeries;
+
+        private void ShowActivityIndicator()
+        {
+            ListViewActivityIndicator.IsVisible = true;
+            ListViewActivityIndicator.IsRunning = true;
+        }
+
+        private void HideActivityIndicator()
+        {
+            ListViewActivityIndicator.IsVisible = false;
+            ListViewActivityIndicator.IsRunning = false;
+        }
+
         public ViewSeriesList()
         {
             InitializeComponent();
@@ -26,6 +34,8 @@ namespace LykatekXamarinApp.Views
 
         public void AddSeries()
         {
+            ShowActivityIndicator();
+
             try
             {
                 obSeries = new ObservableCollection<ConfigSeries>(Settings.ConfigSeries.Where(cs => cs.AppItem == true));
@@ -34,10 +44,14 @@ namespace LykatekXamarinApp.Views
             {
                 DisplayAlert("Error", ex.Message.ToString(), "OK");
             }
+
+            HideActivityIndicator();
         }
 
         private async void SeriesList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+
+            ShowActivityIndicator();
             try
             {
                 var selectedSeries = (ConfigSeries)e.Item;
@@ -49,7 +63,11 @@ namespace LykatekXamarinApp.Views
             {
                 await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
+            
+            // Flush old selection
             SeriesList.SelectedItem = null;
+
+            HideActivityIndicator();
         }
     }
 }
