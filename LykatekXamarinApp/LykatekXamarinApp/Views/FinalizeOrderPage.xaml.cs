@@ -91,6 +91,10 @@ namespace LykatekXamarinApp.Views
                 DeliveryZipCode.Text = addressZipAndTown[1].ToString();
                 DeliveryCity.Text = addressZipAndTown[2].ToString();
             }
+            else
+            {
+                await this.DisplayAlert("GPSfejl", "Der Skete en fejl, ved brug af GPS", "OK");
+            }
         }
 
         private void SetPriorityOrder()
