@@ -32,7 +32,6 @@ namespace LykatekXamarinApp.Views
         {
             LoginActivityIndicator.IsRunning = true;
             LoginButton.IsEnabled = false;
-
             try
             {
                 string inputUsername = this.inputUsername.Text;

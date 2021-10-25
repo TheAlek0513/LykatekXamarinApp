@@ -5,6 +5,7 @@ using LykatekXamarinApp.Models.Uniconta;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Uniconta.API.Service;
@@ -83,6 +84,7 @@ namespace LykatecMobileApp.Util
 
             return true;
         }
+
         #endregion
         #region Uniconta CRUD
 
@@ -92,18 +94,23 @@ namespace LykatecMobileApp.Util
             return (await Settings.CrudApi.Query<ConfigGroup>()).ToList();
         }
 
-        public static async Task<List<UserDocsClient>> getUserDocsClient()
+        public static async Task getUserDocsClient()
         {
-            var UserDocs = new UserDocsClient { };
-            await Settings.crudApi.Read(UserDocs );
-            return null;
+            var userDocsClients = (await Settings.CrudApi.Query<UserDocsClient>()).ToList();
+            var userDocsClient = userDocsClients.Find(x => x.KeyName == "Test Billeder");
+            var test2 = (Settings.CrudApi.Read(userDocsClient).Result);
+            var lol = userDocsClient.DocumentGuid;
+            var data = userDocsClient._Data;
+            var test = 1;
+            //return Userdocs;
         }
 
         public static async Task<InvItemClient> getInvItemWithPictures()
         {
             var itemClients = (await Settings.CrudApi.Query<InvItemClient>()).ToList();
             var itemClient = itemClients.Find(x => x.Name == "Test Billeder");
-            var userA = itemClient.UserAttachment;
+            var userPhoto = itemClient.Photo;
+            var userImage = itemClient.Image;
             return itemClient;
         }
 
