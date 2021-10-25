@@ -130,11 +130,6 @@ namespace LykatecMobileApp.Util
 
         public static async Task SyncProductImages()
         {
-            foreach (var udc in (await GetUserDocsClient()))
-            {
-                //Settings.ConfigSerieImages.Add(udc);
-            }
-
             var assoc = GetProductImagesAssoc();
 
             foreach (var cs in Settings.ConfigSeries.Where(cs => cs.AppItem == true))
