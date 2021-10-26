@@ -69,6 +69,7 @@ namespace LykatecMobileApp.Util
             if (authenticatedContactPerson != null)
             {
                 res = authenticatedContactPerson;
+                Settings.ContactPersonName = authenticatedContactPerson.Name;
             }
 
             return res;

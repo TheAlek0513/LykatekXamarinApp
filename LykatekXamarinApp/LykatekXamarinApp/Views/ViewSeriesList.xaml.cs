@@ -39,6 +39,7 @@ namespace LykatekXamarinApp.Views
             try
             {
                 obSeries = new ObservableCollection<ConfigSeries>(Settings.ConfigSeries.Where(cs => cs.AppItem == true));
+
             }
             catch (Exception ex)
             {
