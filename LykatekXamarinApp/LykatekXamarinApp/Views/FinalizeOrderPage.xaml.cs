@@ -24,7 +24,8 @@ namespace LykatekXamarinApp.Views
             InitializeComponent();
             DatePickerInput.SetValue(DatePicker.MinimumDateProperty, DateTime.Now);
             SetPriorityOrder();
-
+            ContactName.Text = Settings.ContactPersonName;
+            ContactPhone.Text = Settings.ContactPersonUsername;
             DeliveryStreet.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryAddress) ? Settings.LatestDeliveryAddress : "";
             DeliveryCity.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryCity) ? Settings.LatestDeliveryCity : "";
             DeliveryZipCode.Text = !String.IsNullOrEmpty(Settings.LatestDeliveryZipCode) ? Settings.LatestDeliveryZipCode : "";
