@@ -13,7 +13,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" Padding="5" VerticalOptions="FillAndExpand" MinimumHeightRequest="100">
-                                    <Image Source="{Binding ImageSource}" WidthRequest="70" HeightRequest="70"/>
+                                    <Image Source="NoImageAvailable.jpg" WidthRequest="70" HeightRequest="70"/>
                                     <StackLayout Orientation="Vertical" Padding="2" VerticalOptions="Center">
                                         <Label Text="{Binding DisplayText}" FontSize="20" Margin="2" TextColor="Black" FontAttributes="Bold"/>
                                     </StackLayout>

@@ -13,7 +13,7 @@ namespace LykatekXamarinApp.Models.Uniconta
 			public override int UserTableId { get { return 34503; } }
 			public override int CompanyId { get { return 51398; } }
 			public string DisplayText => KeyName;
-			public ImageSource ImageSource { get; set; }
+			public ImageSource ImageSource { get; set; } = null;
 
 			[Display(Name = "Engelsk navn")]
 			public string EnglishName

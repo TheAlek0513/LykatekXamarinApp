@@ -113,6 +113,12 @@ namespace LykatecMobileApp.Util
                         {
                             _ = (Settings.CrudApi.Read(associatedUserDocsClient).Result);
                             MemoryStream stream = new MemoryStream(associatedUserDocsClient._Data);
+
+                            // Something is fishy here: 
+                            // System.ObjectDisposedException: 'Cannot access a closed Stream.'
+
+                            // I ViewSeriesList.xaml.cs skulle vi gerne have sat ImageSource, men anden gang vi henter view'et "ViewSeriesList" breaker den med ovenstående fejl-meddelse.
+
                             cs.ImageSource = ImageSource.FromStream(() => stream);
                         }
                     }

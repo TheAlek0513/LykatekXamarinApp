@@ -28,7 +28,6 @@ namespace LykatecMobileApp.Util
         public static List<ContactPerson> contactList { get; set; }
         public static string ContactPersonId { get; set; }
         public static string DebtorId { get; set; }
-
         public static string LatestDeliveryAddress { get; set; }
         public static string LatestDeliveryCity { get; set; }
         public static string LatestDeliveryZipCode { get; set; }
