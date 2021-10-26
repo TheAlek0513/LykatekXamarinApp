@@ -8,6 +8,7 @@ using System.Reflection;
 using LykatekXamarinApp.Models;
 using LykatekXamarinApp.Util;
 using System.Linq;
+using System.IO;
 
 namespace LykatekXamarinApp.Views
 {
@@ -104,19 +105,20 @@ namespace LykatekXamarinApp.Views
         {
             configSerie = cs;
             InitializeComponent();
-            switch (configSerie.KeyName)
-            {
-                case "T-muffe gr° parallel afgr":
-                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/T_muffe_paralllell_afgrening.png");
-                    break;
-                case "T-muffe u afgrening":
-                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/T_muffe_afgrening.png");
 
-                    break;
-                default:
-                    ProduktImage.Source = ImageSource.FromFile("Resources/drawable/NoImageAvailable.jpg");
-                    break;
+            ProductImage.Source = ImageSource.FromFile("Resources/drawable/NoImageAvailable.jpg");
+            var configSerieImages = Settings.ConfigSerieImages.Where(csi => csi.ConfigSerieRowId == cs.RowId).ToList();
+
+            if (configSerieImages.Count > 0)
+            {
+                var configSerieImage = configSerieImages.First();
+                _ = (Settings.CrudApi.Read(configSerieImage.UserDocsClient).Result);
+                var stream = new MemoryStream(configSerieImage.UserDocsClient._Data);
+                ProductImage.Source = ImageSource.FromStream(() => stream);
+
+                Console.WriteLine("Found Image: " + configSerieImage.ConfigSerieRowId);
             }
+
             AddEntries();
         }
 

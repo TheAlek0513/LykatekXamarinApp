@@ -48,8 +48,6 @@ namespace LykatekXamarinApp.Views
                 ShowActivityIndicator();
                 _ = Utillity.ContactLogout(); // skal fixes senere
                 Application.Current.MainPage = new LoginPage();
-                Utillity.getUserDocsClient();
-                var test = Utillity.getInvItemWithPictures();
                 HideActivityIndicator();
             }
         }

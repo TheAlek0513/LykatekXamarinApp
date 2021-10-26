@@ -1,15 +1,11 @@
-﻿using LykatecMobileApp.Data;
-using LykatekXamarinApp;
+﻿using LykatekXamarinApp;
 using LykatekXamarinApp.Models;
 using LykatekXamarinApp.Models.Uniconta;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Uniconta.API.Service;
-using Uniconta.API.System;
 using Uniconta.ClientTools.DataModel;
 using Uniconta.Common;
 using Uniconta.DataModel;
@@ -40,6 +36,7 @@ namespace LykatecMobileApp.Util
             }
 
             await SyncConfigSeries();
+            await SyncProductImages();
             return true;
         }
 
@@ -91,28 +88,7 @@ namespace LykatecMobileApp.Util
 
         public static async Task<List<ConfigGroup>> GetConfigGroups()
         {
-            // check login
             return (await Settings.CrudApi.Query<ConfigGroup>()).ToList();
-        }
-
-        public static async Task getUserDocsClient()
-        {
-            var userDocsClients = (await Settings.CrudApi.Query<UserDocsClient>()).ToList();
-            var userDocsClient = userDocsClients.Find(x => x.KeyName == "Test Billeder");
-            var test2 = (Settings.CrudApi.Read(userDocsClient).Result);
-            var lol = userDocsClient.DocumentGuid;
-            var data = userDocsClient._Data;
-            var test = 1;
-            //return Userdocs;
-        }
-
-        public static async Task<InvItemClient> getInvItemWithPictures()
-        {
-            var itemClients = (await Settings.CrudApi.Query<InvItemClient>()).ToList();
-            var itemClient = itemClients.Find(x => x.Name == "Test Billeder");
-            var userPhoto = itemClient.Photo;
-            var userImage = itemClient.Image;
-            return itemClient;
         }
 
         public static async Task SyncConfigSeries()
@@ -134,6 +110,45 @@ namespace LykatecMobileApp.Util
         {
             var res = await Settings.crudApi.Insert(orderTable);
             return res;
+        }
+        #endregion
+
+        #region images
+        public static Dictionary<int, string[]> GetProductImagesAssoc()
+        {
+            Dictionary<int, string[]> list = new Dictionary<int, string[]>();
+
+            list.Add(677, new string[]{ "76b53e60-6a79-5be2-2923-c1476c4e913b" });
+            list.Add(681, new string[]{ "76b53e64-8bdc-385f-8cc2-7c24c9af2c58" });
+
+            return list;
+        }
+
+        public static async Task<List<UserDocsClient>> GetUserDocsClient()
+        {
+            return (await Settings.CrudApi.Query<UserDocsClient>()).ToList();
+        }
+
+        public static async Task SyncProductImages()
+        {
+            var assoc = GetProductImagesAssoc();
+
+            foreach (var cs in Settings.ConfigSeries.Where(cs => cs.AppItem == true))
+            {
+                if (assoc.ContainsKey(cs.RowId))
+                {
+                    if (assoc.TryGetValue(cs.RowId, out string[] guids))
+                    {
+                        var associatedUserDocsClient = (await GetUserDocsClient()).Where(udc => udc.DocumentGuid.ToString() == guids.First().ToString());
+                        Settings.ConfigSerieImages.Add(new ConfigSerieImage()
+                        {
+                            ConfigSerieRowId = cs.RowId,
+                            UserDocsClient = associatedUserDocsClient.First()
+                        });
+                    }
+                }
+            }
+
         }
         #endregion
 

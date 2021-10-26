@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Frame Margin="10" BorderColor="Black">
-                <Image x:Name="ProduktImage" Source="T_muffe_paralllell_afgrening.png"></Image>
+                <Image x:Name="ProductImage"></Image>
             </Frame>
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout Padding="10">

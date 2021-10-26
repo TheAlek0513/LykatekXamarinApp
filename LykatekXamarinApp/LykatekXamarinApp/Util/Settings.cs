@@ -33,6 +33,10 @@ namespace LykatecMobileApp.Util
         public static string LatestDeliveryAddress { get; set; }
         public static string LatestDeliveryCity { get; set; }
         public static string LatestDeliveryZipCode { get; set; }
+
+        public static List<ConfigSerieImage> ConfigSerieImages = new List<ConfigSerieImage>();
+
+
         public static Uniconta.API.Service.Session Session
         {
             get
