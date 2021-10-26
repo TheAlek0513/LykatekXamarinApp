@@ -33,7 +33,7 @@ namespace LykatekXamarinApp.Views
             { "T2", "green" },
         };
         private Entry firstEntryField = null;
-        public int LastTabIndex = 0;
+        public int LastTabIndex = 1;
 
         private RadioButton M1_krympbarRBJa = null;
         private RadioButton M1_krympbarRBNej = null;
@@ -113,10 +113,8 @@ namespace LykatekXamarinApp.Views
             {
                 var configSerieImage = configSerieImages.First();
                 _ = (Settings.CrudApi.Read(configSerieImage.UserDocsClient).Result);
-                var stream = new MemoryStream(configSerieImage.UserDocsClient._Data);
+                MemoryStream stream = new MemoryStream(configSerieImage.UserDocsClient._Data);
                 ProductImage.Source = ImageSource.FromStream(() => stream);
-
-                Console.WriteLine("Found Image: " + configSerieImage.ConfigSerieRowId);
             }
 
             AddEntries();

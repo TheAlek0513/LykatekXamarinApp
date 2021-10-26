@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Uniconta.ClientTools.DataModel;
+﻿using Uniconta.ClientTools.DataModel;
 
 namespace LykatekXamarinApp.Models
 {

@@ -6,6 +6,10 @@
     <ContentPage.Content>
         <StackLayout>
             <Image Source="logo.png" />
+
+            <Label FontSize="16" Padding="2" TextColor="Black" x:Name="EmailDisplay"></Label>
+            <Label FontSize="16" Padding="2" TextColor="Black" x:Name="PhoneDisplay"></Label>
+            
             <Button Clicked="CallLykatec_Clicked" Text="Ring til Lykatec" Image="phone.png" />
             <Button Clicked="EmailLykatec_Clicked" Text="Send e-mail til Lykatec" Image="email.png" />
 

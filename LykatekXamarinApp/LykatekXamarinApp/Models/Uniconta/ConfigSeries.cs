@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Uniconta.Common;
 using Uniconta.DataModel;
+using Xamarin.Forms;
 
 namespace LykatekXamarinApp.Models.Uniconta
 {
@@ -12,6 +13,7 @@ namespace LykatekXamarinApp.Models.Uniconta
 			public override int UserTableId { get { return 34503; } }
 			public override int CompanyId { get { return 51398; } }
 			public string DisplayText => KeyName;
+			public ImageSource ImageSource { get; set; }
 
 			[Display(Name = "Engelsk navn")]
 			public string EnglishName

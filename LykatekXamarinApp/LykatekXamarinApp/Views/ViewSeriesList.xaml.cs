@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LykatekXamarinApp.Models;
 
 namespace LykatekXamarinApp.Views
 {

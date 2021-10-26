@@ -4,7 +4,6 @@ using LykatekXamarinApp.Util;
 using System;
 using System.Collections.Generic;
 using Uniconta.API.System;
-using Uniconta.ClientTools.DataModel;
 using Uniconta.DataModel;
 
 namespace LykatecMobileApp.Util

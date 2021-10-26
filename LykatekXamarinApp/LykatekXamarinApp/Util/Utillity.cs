@@ -3,13 +3,16 @@ using LykatekXamarinApp.Models;
 using LykatekXamarinApp.Models.Uniconta;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Uniconta.ClientTools.DataModel;
 using Uniconta.Common;
 using Uniconta.DataModel;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace LykatecMobileApp.Util
 {
@@ -92,7 +95,32 @@ namespace LykatecMobileApp.Util
 
         public static async Task SyncConfigSeries()
         {
-            Settings.ConfigSeries = (await Settings.CrudApi.Query<ConfigSeries>()).ToList();
+            List<ConfigSeries> list = new List<ConfigSeries>();
+
+            var assoc = GetProductImagesAssoc();
+
+            foreach (var cs in (await Settings.CrudApi.Query<ConfigSeries>()).ToList())
+            {
+
+                if (assoc.ContainsKey(cs.RowId))
+                {
+                    if (assoc.TryGetValue(cs.RowId, out string[] guids))
+                    {
+                        var associatedUserDocsClient = (await GetUserDocsClient()).Where(udc => udc.DocumentGuid.ToString() == guids.First().ToString()).FirstOrDefault();
+
+                        if (associatedUserDocsClient != null)
+                        {
+                            _ = (Settings.CrudApi.Read(associatedUserDocsClient).Result);
+                            MemoryStream stream = new MemoryStream(associatedUserDocsClient._Data);
+                            cs.ImageSource = ImageSource.FromStream(() => stream);
+                        }
+                    }
+                }
+
+                list.Add(cs);
+            }
+
+            Settings.ConfigSeries = list;
         }
 
         public static async Task<List<ContactPerson>> GetContactPersons()
@@ -139,6 +167,7 @@ namespace LykatecMobileApp.Util
                     if (assoc.TryGetValue(cs.RowId, out string[] guids))
                     {
                         var associatedUserDocsClient = (await GetUserDocsClient()).Where(udc => udc.DocumentGuid.ToString() == guids.First().ToString());
+
                         Settings.ConfigSerieImages.Add(new ConfigSerieImage()
                         {
                             ConfigSerieRowId = cs.RowId,
@@ -149,6 +178,33 @@ namespace LykatecMobileApp.Util
             }
 
         }
+
+        //public static ObservableCollection<SerieListItem> GetSerieListItems()
+        //{
+        //    ObservableCollection<SerieListItem> list = new ObservableCollection<SerieListItem>();
+
+        //    foreach (var cs in Settings.ConfigSeries.Where(cs => cs.AppItem == true))
+        //    {
+
+        //        var firstImage = Settings.ConfigSerieImages.Where(csi => csi.ConfigSerieRowId == cs.RowId).FirstOrDefault();
+
+
+        //        SerieListItem listItem = new SerieListItem()
+        //        {
+        //            ConfigSerie = cs
+        //        };
+
+        //        if (firstImage != null)
+        //        {
+        //            listItem.ConfigSerieImage = firstImage;
+        //        }
+
+        //        list.Add(listItem);
+        //    }
+
+        //    return list;
+        //}
+
         #endregion
 
         #region CheckInternet

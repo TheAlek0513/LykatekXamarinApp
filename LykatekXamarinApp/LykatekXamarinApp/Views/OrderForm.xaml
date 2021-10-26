@@ -14,7 +14,7 @@
                     <Frame BorderColor="Black">
                         <StackLayout>
                             <Label x:Name="TotalItemCountLabel" TextColor="Black" FontAttributes="Bold" Padding="2" FontSize="18" Text="Antal der ønskes"/>
-                            <Entry x:Name="TotalItemCount" Text="1" TextColor="Black" TabIndex="{Binding LastTabIndex}" ReturnType="Next" Placeholder="E.g. 1, 2 eller 3." Keyboard="Numeric"></Entry>
+                            <Entry x:Name="TotalItemCount" Text="1" TextColor="Black" TabIndex="1" ReturnType="Next" Placeholder="E.g. 1, 2 eller 3." Keyboard="Numeric"></Entry>
                         </StackLayout>
                     </Frame>
 
