@@ -172,7 +172,6 @@ namespace LykatekXamarinApp.Views
             int index = 0;
             foreach (RelevantOrderProperty field in GetRelevantProps())
             {
-                int currentTabIndex = LastTabIndex++;
                 index++;
                 string entryColour = "#000000";
                 string attemptColor = entryColour;
@@ -194,7 +193,7 @@ namespace LykatekXamarinApp.Views
                     Placeholder = field.DisplayName,
                     Keyboard = Keyboard.Numeric,
                     ClassId = field.Name,
-                    TabIndex = currentTabIndex,
+                    TabIndex = LastTabIndex++,
                     ReturnType = ReturnType.Next,
                     TextColor = Color.FromHex(entryColour)
                 };
@@ -241,20 +240,24 @@ namespace LykatekXamarinApp.Views
                                 FontSize = 18,
                                 Padding = 2,
                                 FontAttributes = FontAttributes.Bold,
-                                TextColor = Color.FromHex(entryColour)
+                                TextColor = Color.FromHex(entryColour),
+                                TabIndex = LastTabIndex++,
                             };
                             M1_krympbarRBJa = new RadioButton
                             {
                                 GroupName = "M1_krymp",
                                 Content = "Ja",
-                                Value = "1"
-                                //add tabindex here plz
+                                Value = "1",
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             }; 
                             M1_krympbarRBNej = new RadioButton
                             {
                                 GroupName = "M1_krymp",
                                 Content = "Nej",
-                                Value = "0"
+                                Value = "0",
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
 
                             Label M1_MasticLabel = new Label
@@ -268,7 +271,8 @@ namespace LykatekXamarinApp.Views
 
                             M1_Mastic = new CheckBox
                             {
-                                
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
                             Frame frame1 = new Frame
                             {
@@ -301,13 +305,17 @@ namespace LykatekXamarinApp.Views
                             {
                                 GroupName = "T1_krymp",
                                 Content = "Ja",
-                                Value = "1"
+                                Value = "1",
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
                             T1_krympbarRBNej = new RadioButton
                             {
                                 GroupName = "T1_krymp",
                                 Content = "Nej",
-                                Value = "0"
+                                Value = "0",
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
 
                             Label T1_MasticLabel = new Label
@@ -321,7 +329,8 @@ namespace LykatekXamarinApp.Views
 
                             T1_Mastic = new CheckBox
                             {
-
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
 
                             Label T1_AnboringLabel = new Label
@@ -335,7 +344,8 @@ namespace LykatekXamarinApp.Views
 
                             T1_Anboring = new CheckBox
                             {
-
+                                TabIndex = LastTabIndex++,
+                                IsTabStop = true
                             };
 
                             Frame frameT = new Frame
