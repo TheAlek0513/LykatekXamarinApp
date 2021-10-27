@@ -248,6 +248,7 @@ namespace LykatekXamarinApp.Views
                                 GroupName = "M1_krymp",
                                 Content = "Ja",
                                 Value = "1"
+                                //add tabindex here plz
                             }; 
                             M1_krympbarRBNej = new RadioButton
                             {

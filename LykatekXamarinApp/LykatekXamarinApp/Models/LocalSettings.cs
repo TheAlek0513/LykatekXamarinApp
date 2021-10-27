@@ -17,5 +17,6 @@ namespace LykatecMobileApp.Models
         public string DebtorAccount { get; set; }
         public string ContactPersonId { get; set; }
         public string DebtorId { get; set; }
+        public string ContactPersonName { get; set; }
     }
 }

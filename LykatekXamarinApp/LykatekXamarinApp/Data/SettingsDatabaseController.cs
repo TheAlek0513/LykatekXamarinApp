@@ -84,6 +84,7 @@ namespace LykatecMobileApp.Data
                     Settings.ContactPersonPassword = settings.ContactPersonPassword;
                     Settings.ContactPersonId = settings.ContactPersonId;
                     Settings.DebtorId = settings.DebtorId;
+                    Settings.ContactPersonName = settings.ContactPersonUsername;
                 }
             }
             catch { }
@@ -107,6 +108,7 @@ namespace LykatecMobileApp.Data
                         ContactPersonPassword = Settings.ContactPersonPassword,
                         ContactPersonId = Settings.ContactPersonId,
                         DebtorId = Settings.DebtorId,
+                        ContactPersonName = Settings.ContactPersonUsername,
                     };
                     try
                     {
